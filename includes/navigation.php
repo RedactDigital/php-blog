@@ -18,11 +18,11 @@
            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                <ul class="nav navbar-nav">
 
-                   <li class="nav-item dropdown">
-                       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   <li class="dropdown">
+                       <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                            Categories
                        </a>
-                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                       <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                            <?php
 
                             $query = "SELECT * FROM categories LIMIT 3";
@@ -32,11 +32,11 @@
                                 $cat_title = $row['cat_title'];
                                 $cat_id = $row['cat_id'];
 
-                                echo "<li><a class='dropdown-item' href='category.php?category=$cat_id'>{$cat_title}</a></li>";
+                                echo "<li><a href='category.php?category=$cat_id'>{$cat_title}</a></li>";
                             }
 
                             ?>
-                       </div>
+                       </ul>
                    </li>
 
 
