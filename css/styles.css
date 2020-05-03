@@ -12,13 +12,13 @@
 
 }
 
-figure .image-syle-align-right {
+figure > .image-syle-align-right {
     float: right;
     max-width: 50%;
     padding: 0 0 5px 5px;
 }
 
-figure .image-syle-align-left {
+figure > .image-syle-align-left {
     float: left;
     max-width: 50%;
     padding: 5px 5px 0 0;
