@@ -14,4 +14,12 @@
 
 .image-syle-align-right img {
     float: right;
+    max-width: 50%;
+    padding: 0 0 5px 5px;
+}
+
+.image-syle-align-left img {
+    float: left;
+    max-width: 50%;
+    padding: 5px 5px 0 0;
 }
