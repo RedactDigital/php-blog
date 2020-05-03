@@ -105,8 +105,9 @@
                 <p><span class="glyphicon glyphicon-time"></span> <?php echo $post_date ?></p>
                 <hr>
                 <img class="img-responsive" src="images/<?php echo $post_image;?>" alt="">
-                <hr>
-                <p id="body"><?php echo $post_content ?></p>
+                <hr><div id="body">
+                <p><?php echo $post_content ?></p>
+                </div>
 
 
                 <hr>
