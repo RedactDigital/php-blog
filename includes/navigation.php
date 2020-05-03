@@ -38,9 +38,9 @@
                             ?>
                        </ul>
                    </li>
-                   </ul>
+               </ul>
 
-                   <ul class="nav navbar-nav navbar-right">
+               <ul class="nav navbar-nav navbar-right">
 
                    <?php if (isLoggedIn()) : ?>
 
@@ -89,8 +89,6 @@
 
                     ?>
 
-                   </ul>
-
                    <form class="navbar-form navbar-left">
                        <div class="form-group">
                            <input type="text" class="form-control" placeholder="Search">
@@ -98,8 +96,12 @@
                        <button type="submit" class="btn btn-default">Submit</button>
                    </form>
 
+               </ul>
 
-               
+
+
+
+
            </div>
            <!-- /.navbar-collapse -->
        </div>
