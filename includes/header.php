@@ -11,7 +11,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+<<<<<<< HEAD
     <title>Created Digital | Blog | Physics | Technology | Lifestyle</title>
+=======
+    <title>Blog | Created Digital | Physics | Technology | Lifestyle</title>
+>>>>>>> c8d6c612ab1da7bc26a880af4deba09bae8a8004
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
