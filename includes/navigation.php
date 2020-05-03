@@ -1,31 +1,3 @@
-<?php
-
-
-if(ifItIsMethod('post')){
-
-
-        if(isset($_POST['login'])){
-
-
-            if(isset($_POST['username']) && isset($_POST['password'])){
-
-                login_user($_POST['username'], $_POST['password']);
-
-
-            }else {
-
-
-                redirect('/');
-            }
-
-
-        }
-
-}
-
-?>
-   
-   
    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
        <div class="container">
 
@@ -117,7 +89,7 @@ if(ifItIsMethod('post')){
 
                     ?>
 
-                   <form class="navbar-form navbar-left">
+                   <form action="search.php" method="post" class="navbar-form navbar-left">
                        <div class="form-group">
                            <input name="search" type="text" class="form-control" placeholder="Search">
                        </div>
