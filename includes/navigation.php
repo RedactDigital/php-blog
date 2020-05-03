@@ -32,7 +32,7 @@
                                 $cat_title = $row['cat_title'];
                                 $cat_id = $row['cat_id'];
 
-                                echo "<a class='dropdown-item' href='category.php?category=$cat_id'>{$cat_title}</a>";
+                                echo "<li><a class='dropdown-item' href='category.php?category=$cat_id'>{$cat_title}</a></li>";
                             }
 
                             ?>
