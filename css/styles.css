@@ -1,42 +1,35 @@
 .pager li .active_link {
 
-background: #000 !important;
+    background: #000 !important;
 
 }
 
 
 .form-control.pwd {
 
-background: black !important;
-width: 30%;
+    background: black !important;
+    width: 30%;
 
 }
 
-.image {
-	& .image-style-side,
-	& .image-style-align-left,
-	& .image-style-align-center,
-	& .image-style-align-right {
-		max-width: 50%;
-	}
 
-	& .image-style-side {
-		float: right;
-		margin-left: var(--ck-image-style-spacing);
-	}
+.image .image-style-side {
+    float: right;
+    margin-left: auto;
+    max-width: 50%;
+}
 
-	& .image-style-align-left {
-		float: left;
-		margin-right: var(--ck-image-style-spacing);
-	}
+.image .image-style-align-left {
+    float: left;
+    margin-right: auto;
+}
 
-	& .image-style-align-center {
-		margin-left: auto;
-		margin-right: auto;
-	}
+.image .image-style-align-center {
+    margin-left: auto;
+    margin-right: auto;
+}
 
-	& .image-style-align-right {
-		float: right;
-		margin-left: var(--ck-image-style-spacing);
-	}
+.image .image-style-align-right {
+    float: right;
+    margin-left: auto;
 }
