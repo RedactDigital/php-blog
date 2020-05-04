@@ -1,6 +1,9 @@
 <?php session_start(); ?>
-<?php include "admin/functions.php"; ?>
-<!DOCTYPE html>
+<?php include "admin/functions.php"; 
+header("Cache-Control: max-age=2592000");
+
+?>
+<!DOCTYPE html >
 <html lang="en">
 
 <head>
