@@ -9,9 +9,11 @@
 
 
 <!-- Page Content -->
-<div class="container">
+<div class="container-fluid">
 
     <div class="row">
+
+    <h1 class="text-center">Millennial Topics</h1>
 
         <!-- Blog Entries Column -->
 

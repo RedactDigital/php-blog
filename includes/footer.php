@@ -2,7 +2,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Created Digital</p>
+                    <p>Copyright &copy; Millennial Topics</p>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
