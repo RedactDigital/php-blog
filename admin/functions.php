@@ -1,141 +1,122 @@
 <?php
 
-function redirect($location){
+use CKSource\CKFinder\Command\ImageResize;
+
+function redirect($location)
+{
 
 
     header("Location:" . $location);
     exit;
-
 }
 
 
-function ifItIsMethod($method=null){
+function ifItIsMethod($method = null)
+{
 
-    if($_SERVER['REQUEST_METHOD'] == strtoupper($method)){
+    if ($_SERVER['REQUEST_METHOD'] == strtoupper($method)) {
 
         return true;
-
     }
 
     return false;
-
 }
 
-function isLoggedIn(){
+function isLoggedIn()
+{
 
-    if(isset($_SESSION['user_role'])){
+    if (isset($_SESSION['user_role'])) {
 
         return true;
-
-
     }
 
 
-   return false;
-
+    return false;
 }
 
-function checkIfUserIsLoggedInAndRedirect($redirectLocation=null){
+function checkIfUserIsLoggedInAndRedirect($redirectLocation = null)
+{
 
-    if(isLoggedIn()){
+    if (isLoggedIn()) {
 
         redirect($redirectLocation);
-
     }
-
 }
 
 
 
 
 
-function escape($string) {
-
-global $connection;
-
-return mysqli_real_escape_string($connection, trim($string));
-
-
-}
-
-
-
-function set_message($msg){
-
-if(!$msg) {
-
-$_SESSION['message']= $msg;
-
-} else {
-
-$msg = "";
-
-
-    }
-
-
-}
-
-
-function display_message() {
-
-    if(isset($_SESSION['message'])) {
-        echo $_SESSION['message'];
-        unset($_SESSION['message']);
-    }
-
-
-}
-
-
-
-
-function users_online() {
-
-
-
-    if(isset($_GET['onlineusers'])) {
+function escape($string)
+{
 
     global $connection;
 
-    if(!$connection) {
-
-        session_start();
-
-        include("../includes/db.php");
-
-        $session = session_id();
-        $time = time();
-        $time_out_in_seconds = 05;
-        $time_out = $time - $time_out_in_seconds;
-
-        $query = "SELECT * FROM users_online WHERE session = '$session'";
-        $send_query = mysqli_query($connection, $query);
-        $count = mysqli_num_rows($send_query);
-
-            if($count == NULL) {
-
-            mysqli_query($connection, "INSERT INTO users_online(session, time) VALUES('$session','$time')");
+    return mysqli_real_escape_string($connection, trim($string));
+}
 
 
+
+function set_message($msg)
+{
+
+    if (!$msg) {
+
+        $_SESSION['message'] = $msg;
+    } else {
+
+        $msg = "";
+    }
+}
+
+
+function display_message()
+{
+
+    if (isset($_SESSION['message'])) {
+        echo $_SESSION['message'];
+        unset($_SESSION['message']);
+    }
+}
+
+
+
+
+function users_online()
+{
+
+
+
+    if (isset($_GET['onlineusers'])) {
+
+        global $connection;
+
+        if (!$connection) {
+
+            session_start();
+
+            include("../includes/db.php");
+
+            $session = session_id();
+            $time = time();
+            $time_out_in_seconds = 05;
+            $time_out = $time - $time_out_in_seconds;
+
+            $query = "SELECT * FROM users_online WHERE session = '$session'";
+            $send_query = mysqli_query($connection, $query);
+            $count = mysqli_num_rows($send_query);
+
+            if ($count == NULL) {
+
+                mysqli_query($connection, "INSERT INTO users_online(session, time) VALUES('$session','$time')");
             } else {
 
-            mysqli_query($connection, "UPDATE users_online SET time = '$time' WHERE session = '$session'");
-
-
+                mysqli_query($connection, "UPDATE users_online SET time = '$time' WHERE session = '$session'");
             }
 
-        $users_online_query =  mysqli_query($connection, "SELECT * FROM users_online WHERE time > '$time_out'");
-        echo $count_user = mysqli_num_rows($users_online_query);
-
-
-    }
-
-
-
-
-
-
+            $users_online_query =  mysqli_query($connection, "SELECT * FROM users_online WHERE time > '$time_out'");
+            echo $count_user = mysqli_num_rows($users_online_query);
+        }
     } // get request isset()
 
 
@@ -146,128 +127,108 @@ users_online();
 
 
 
-function confirmQuery($result) {
-    
+function confirmQuery($result)
+{
+
     global $connection;
 
-    if(!$result ) {
-          
-          die("QUERY FAILED ." . mysqli_error($connection));
-   
-          
-      }
-    
+    if (!$result) {
 
+        die("QUERY FAILED ." . mysqli_error($connection));
+    }
 }
 
 
 
-function insert_categories(){
-    
+function insert_categories()
+{
+
     global $connection;
 
-        if(isset($_POST['submit'])){
+    if (isset($_POST['submit'])) {
 
-            $cat_title = $_POST['cat_title'];
+        $cat_title = $_POST['cat_title'];
 
-        if($cat_title == "" || empty($cat_title)) {
-        
-             echo "This Field should not be empty";
-    
-    } else {
+        if ($cat_title == "" || empty($cat_title)) {
 
+            echo "This Field should not be empty";
+        } else {
 
 
 
 
-    $stmt = mysqli_prepare($connection, "INSERT INTO categories(cat_title) VALUES(?) ");
 
-    mysqli_stmt_bind_param($stmt, 's', $cat_title);
+            $stmt = mysqli_prepare($connection, "INSERT INTO categories(cat_title) VALUES(?) ");
 
-    mysqli_stmt_execute($stmt);
+            mysqli_stmt_bind_param($stmt, 's', $cat_title);
 
-
-        if(!$stmt) {
-        die('QUERY FAILED'. mysqli_error($connection));
-        
-                  }
+            mysqli_stmt_execute($stmt);
 
 
-        
-             }
+            if (!$stmt) {
+                die('QUERY FAILED' . mysqli_error($connection));
+            }
+        }
 
-             
-    mysqli_stmt_close($stmt);
-   
-        
-       }
 
+        mysqli_stmt_close($stmt);
+    }
 }
 
 
-function findAllCategories() {
-global $connection;
+function findAllCategories()
+{
+    global $connection;
 
     $query = "SELECT * FROM categories";
-    $select_categories = mysqli_query($connection,$query);  
+    $select_categories = mysqli_query($connection, $query);
 
-    while($row = mysqli_fetch_assoc($select_categories)) {
-    $cat_id = $row['cat_id'];
-    $cat_title = $row['cat_title'];
+    while ($row = mysqli_fetch_assoc($select_categories)) {
+        $cat_id = $row['cat_id'];
+        $cat_title = $row['cat_title'];
 
-    echo "<tr>";
-        
-    echo "<td>{$cat_id}</td>";
-    echo "<td>{$cat_title}</td>";
-   echo "<td><a href='categories.php?delete={$cat_id}'>Delete</a></td>";
-   echo "<td><a href='categories.php?edit={$cat_id}'>Edit</a></td>";
-    echo "</tr>";
+        echo "<tr>";
 
+        echo "<td>{$cat_id}</td>";
+        echo "<td>{$cat_title}</td>";
+        echo "<td><a href='categories.php?delete={$cat_id}'>Delete</a></td>";
+        echo "<td><a href='categories.php?edit={$cat_id}'>Edit</a></td>";
+        echo "</tr>";
     }
-
-
 }
 
 
-function deleteCategories(){
-global $connection;
+function deleteCategories()
+{
+    global $connection;
 
-    if(isset($_GET['delete'])){
-    $the_cat_id = $_GET['delete'];
-    $query = "DELETE FROM categories WHERE cat_id = {$the_cat_id} ";
-    $delete_query = mysqli_query($connection,$query);
-    header("Location: categories.php");
-
-
+    if (isset($_GET['delete'])) {
+        $the_cat_id = $_GET['delete'];
+        $query = "DELETE FROM categories WHERE cat_id = {$the_cat_id} ";
+        $delete_query = mysqli_query($connection, $query);
+        header("Location: categories.php");
     }
-            
-
-
 }
 
 
-function UnApprove() {
-global $connection;
-if(isset($_GET['unapprove'])){
-    
-    $the_comment_id = $_GET['unapprove'];
-    
-    $query = "UPDATE comments SET comment_status = 'unapproved' WHERE comment_id = $the_comment_id ";
-    $unapprove_comment_query = mysqli_query($connection, $query);
-    header("Location: comments.php");
-    
-    
+function UnApprove()
+{
+    global $connection;
+    if (isset($_GET['unapprove'])) {
+
+        $the_comment_id = $_GET['unapprove'];
+
+        $query = "UPDATE comments SET comment_status = 'unapproved' WHERE comment_id = $the_comment_id ";
+        $unapprove_comment_query = mysqli_query($connection, $query);
+        header("Location: comments.php");
     }
-
-    
-    
-
 }
 
 
-function is_admin($username) {
+function is_admin($username)
+{
 
-    global $connection; 
+    global $connection;
 
     $query = "SELECT user_role FROM users WHERE username = '$username'";
     $result = mysqli_query($connection, $query);
@@ -276,21 +237,20 @@ function is_admin($username) {
     $row = mysqli_fetch_array($result);
 
 
-    if($row['user_role'] == 'admin'){
+    if ($row['user_role'] == 'admin') {
 
         return true;
-
-    }else {
+    } else {
 
 
         return false;
     }
-
 }
 
 
 
-function username_exists($username){
+function username_exists($username)
+{
 
     global $connection;
 
@@ -298,25 +258,19 @@ function username_exists($username){
     $result = mysqli_query($connection, $query);
     confirmQuery($result);
 
-    if(mysqli_num_rows($result) > 0) {
+    if (mysqli_num_rows($result) > 0) {
 
         return true;
-
     } else {
 
         return false;
-
     }
-
-
-
-
-
 }
 
 
 
-function email_exists($email){
+function email_exists($email)
+{
 
     global $connection;
 
@@ -325,107 +279,169 @@ function email_exists($email){
     $result = mysqli_query($connection, $query);
     confirmQuery($result);
 
-    if(mysqli_num_rows($result) > 0) {
+    if (mysqli_num_rows($result) > 0) {
 
         return true;
-
     } else {
 
         return false;
-
     }
-
-
-
 }
 
 
-function register_user($username, $email, $password){
+function register_user($username, $email, $password)
+{
 
     global $connection;
 
-        $username = mysqli_real_escape_string($connection, $username);
-        $email    = mysqli_real_escape_string($connection, $email);
-        $password = mysqli_real_escape_string($connection, $password);
+    $username = mysqli_real_escape_string($connection, $username);
+    $email    = mysqli_real_escape_string($connection, $email);
+    $password = mysqli_real_escape_string($connection, $password);
 
-        $password = password_hash( $password, PASSWORD_BCRYPT, array('cost' => 12));
-            
-            
-        $query = "INSERT INTO users (username, user_email, user_password, user_role) ";
-        $query .= "VALUES('{$username}','{$email}', '{$password}', 'subscriber' )";
-        $register_user_query = mysqli_query($connection, $query);
-
-        confirmQuery($register_user_query);
-
-        
+    $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
 
 
+    $query = "INSERT INTO users (username, user_email, user_password, user_role) ";
+    $query .= "VALUES('{$username}','{$email}', '{$password}', 'subscriber' )";
+    $register_user_query = mysqli_query($connection, $query);
 
+    confirmQuery($register_user_query);
 }
 
- function login_user($username, $password)
- {
+function login_user($username, $password)
+{
 
-     global $connection;
+    global $connection;
 
-     $username = trim($username);
-     $password = trim($password);
+    $username = trim($username);
+    $password = trim($password);
 
-     $username = mysqli_real_escape_string($connection, $username);
-     $password = mysqli_real_escape_string($connection, $password);
-
-
-     $query = "SELECT * FROM users WHERE username = '{$username}' ";
-     $select_user_query = mysqli_query($connection, $query);
-     if (!$select_user_query) {
-
-         die("QUERY FAILED" . mysqli_error($connection));
-
-     }
+    $username = mysqli_real_escape_string($connection, $username);
+    $password = mysqli_real_escape_string($connection, $password);
 
 
-     while ($row = mysqli_fetch_array($select_user_query)) {
+    $query = "SELECT * FROM users WHERE username = '{$username}' ";
+    $select_user_query = mysqli_query($connection, $query);
+    if (!$select_user_query) {
 
-         $db_user_id = $row['user_id'];
-         $db_username = $row['username'];
-         $db_user_password = $row['user_password'];
-         $db_user_firstname = $row['user_firstname'];
-         $db_user_lastname = $row['user_lastname'];
-         $db_user_role = $row['user_role'];
+        die("QUERY FAILED" . mysqli_error($connection));
+    }
 
 
-         if (password_verify($password,$db_user_password)) {
+    while ($row = mysqli_fetch_array($select_user_query)) {
 
-             $_SESSION['username'] = $db_username;
-             $_SESSION['firstname'] = $db_user_firstname;
-             $_SESSION['lastname'] = $db_user_lastname;
-             $_SESSION['user_role'] = $db_user_role;
-
-
-
-             redirect("/admin");
+        $db_user_id = $row['user_id'];
+        $db_username = $row['username'];
+        $db_user_password = $row['user_password'];
+        $db_user_firstname = $row['user_firstname'];
+        $db_user_lastname = $row['user_lastname'];
+        $db_user_role = $row['user_role'];
 
 
-         } else {
+        if (password_verify($password, $db_user_password)) {
 
-
-             return false;
+            $_SESSION['username'] = $db_username;
+            $_SESSION['firstname'] = $db_user_firstname;
+            $_SESSION['lastname'] = $db_user_lastname;
+            $_SESSION['user_role'] = $db_user_role;
 
 
 
-         }
+            redirect("/admin");
+        } else {
 
 
+            return false;
+        }
+    }
 
-     }
+    return true;
+}
 
-     return true;
+function imageResize($post_image)
+{
+    /* (A) INIT */
+    // (A1) SETTINGS
+    $source = "../images/" . $post_image; // Source image file
+    $destination = "../images/" . $post_image; // Resized file name, extension is automatic
+    $max_width = 1280;
+    $max_height = 853;
+    // Image quality
+    // JPG files - 0 is lowest, 100 is highest
+    // PNG files - 0 no compression to 9 most compression
+    $quality = ["jpg" => 100, "jpeg" => 100, "png" => 0];
+    $allowed = ["bmp", "gif", "jpg", "jpeg", "png", "webp"];
 
- }
+    // (A2) READ IMAGE INFORMATION
+    $ext = strtolower(pathinfo($source, PATHINFO_EXTENSION));
+    $size = getimagesize($source);
+    $width = $size[0];
+    $height = $size[1];
+    $destination;
+
+    // (A3) ERROR FLAGS
+    $pass = true;
+    $error = "";
 
 
+    /* (B) FILE CHECKS */
+    // (B1) INVALID FILE TYPE
+    if (!in_array($ext, $allowed)) {
+        $pass = false;
+        $error = "$ext file type not allowed - $source";
+    }
+
+    // (B2) INVALID IMAGE
+    if ($pass && $size == false) {
+        $pass = false;
+        $error = "$source is not a valid image file.";
+    }
+
+    // (B3) STOP IF ERROR
+    if (!$pass) {
+        die($error);
+    }
 
 
+    /* (C) RESIZE */
+    // (C1) RESIZE ONLY IF SOURCE IS LARGER THAN MAX
+    if ($width > $max_width || $height > $max_height) {
+        // Landscape image
+        if ($width > $height) {
+            $new_width = $max_width;
+            $new_height = CEIL($height / ($width / $max_width));
+        }
 
+        // Square or portrait
+        else {
+            $new_height = $max_height;
+            $new_width = CEIL($width / ($height / $max_height));
+        }
 
+        // Create new resized image
+        $fn = "imagecreatefrom" . ($ext == "jpg" ? "jpeg" : $ext);
+        $original = $fn($source);
+        $resize = imagecreatetruecolor($new_width, $new_height);
+        imagecopyresampled($resize, $original, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
 
+        // Save resized to file
+        $fn = "image" . ($ext == "jpg" ? "jpeg" : $ext);
+        if (is_numeric($quality[$ext])) {
+            $fn($resize, $destination, $quality[$ext]);
+        } else {
+            $fn($resize, $destination);
+        }
+        imagedestroy($original);
+        imagedestroy($resize);
+    }
+
+    // (C2) DO NOT RESIZE, JUST COPY
+    else {
+        if (!copy($source, $destination)) {
+            $pass = false;
+            $error = "Error copying from $source to $destination";
+        }
+    }
+
+    echo $pass ? "OK" : $error;
+}

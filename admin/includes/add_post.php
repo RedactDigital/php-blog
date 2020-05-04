@@ -9,15 +9,16 @@ if (isset($_POST['create_post'])) {
     $post_status       = escape($_POST['post_status']);
 
     $post_image        = escape($_FILES['image']['name']);
-    $post_image_temp   = escape($_FILES['image']['tmp_name']);
+    $post_image_temp   = ($_FILES['image']['tmp_name']);
 
 
     $post_tags         = escape($_POST['post_tags']);
     $post_content      = escape($_POST['post_content']);
     $post_date         = escape(date('d-m-y'));
 
-
     move_uploaded_file($post_image_temp, "../images/$post_image");
+
+    imageResize($post_image);
 
 
     $query = "INSERT INTO posts(post_category_id, post_title, post_user, post_date,post_image,post_content,post_tags,post_status) ";

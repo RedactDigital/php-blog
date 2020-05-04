@@ -1,9 +1,5 @@
 RewriteEngine on
 
-RewriteEngine On
-RewriteCond %{HTTPS} !=on
-RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
-
 RewriteRule ^(index|contact|registration)$ $1.php [NC,L]
 
 RewriteRule ^post/(\d+)$ post.php?p_id=$1 [NC,L]
