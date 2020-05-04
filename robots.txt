@@ -1,0 +1,6 @@
+# Instructs all search engines not to crawl admin panel pages, classes, and vendor apps.
+User-agent: * 
+Disallow: /admin/ 
+Disallow: /classes/
+Disallow: /vendor/
+Disallow: /classes/

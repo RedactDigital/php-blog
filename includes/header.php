@@ -8,10 +8,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name=”robots” content="index, follow">
+    <meta name="description" content="Millennial and GenZ blogs on topics that help other generations understand how invaluable we are to the future. ">
+    <meta name="author" content="Patrick Rizzardi">
 
-    <title>Blog | Created Digital | Physics | Technology | Lifestyle</title>
+    <title>Understanding Millennials and GenZ | Millennial Blog Topics</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
