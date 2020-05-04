@@ -18,6 +18,9 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
+   <!-- subscribers -->
+    <script type="text/javascript">var subscribersSiteId='81396ea8-0bd7-4959-bffb-5f0848d5da16';</script><script type="text/javascript" src="https://cdn.subscribers.com/assets/subscribers.js"></script>
+
 </body>
 
 </html>
