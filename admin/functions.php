@@ -459,18 +459,19 @@ function querySelect($table)
     return $result;
 }
 
-function querySelectWherePostPublished($table, $column, $value)
+function checkPostStatus($table, $column, $status)
 {
     global $connection;
 
-    $query = "SELECT * FROM $table WHERE $column = '$value' ";
-    $query_selection = mysqli_query($connection, $query);
+    $query = "SELECT * FROM $table WHERE $column = '$status' ";
+    $result = mysqli_query($connection, $query);
 
-    $result = mysqli_num_rows($query_selection);
+    $result = mysqli_num_rows($result);
 
     confirmQuery($result);
 
     return $result;
+
 }
 
 function querySelectWherePostDraft($table, $column, $value)
