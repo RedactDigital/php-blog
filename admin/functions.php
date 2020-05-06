@@ -457,7 +457,7 @@ function querySelect($table)
     return $result;
 }
 
-function checkPostStatus($table, $column, $status)
+function querySelectWhere($table, $column, $status)
 {
     global $connection;
 
@@ -468,18 +468,4 @@ function checkPostStatus($table, $column, $status)
 
     return $result;
 
-}
-
-function querySelectWherePostDraft($table, $column, $value)
-{
-    global $connection;
-
-    $query = "SELECT * FROM $table WHERE $column = '$value' ";
-    $query_selection = mysqli_query($connection, $query);
-
-    $result = mysqli_num_rows($query_selection);
-
-    confirmQuery($result);
-
-    return $result;
 }
