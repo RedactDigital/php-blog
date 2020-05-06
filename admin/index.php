@@ -88,7 +88,7 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
 
-                                    <div class='huge'><?php //echo $comment_count = querySelect('comments'); ?> </div>
+                                    <div class='huge'><?php echo $comment_count = querySelect('comments'); ?> </div>
 
                                     <div>Comments</div>
                                 </div>
@@ -157,13 +157,13 @@
 
             <?php
 
-            //$post_published_count = querySelectWhere('posts', 'post_status', 'published');
+            $post_published_count = querySelectWhere('posts', 'post_status', 'published');
 
-            //$post_draft_count = querySelectWhere('posts', 'post_status', 'draft');
+            $post_draft_count = querySelectWhere('posts', 'post_status', 'draft');
 
-            //$unapproved_comment_count = querySelectWhere('comments', 'comment_status', 'unapproved');
+            $unapproved_comment_count = querySelectWhere('comments', 'comment_status', 'unapproved');
 
-            //$subscriber_count = querySelectWhere('users', 'user_role', 'subscriber');
+            $subscriber_count = querySelectWhere('users', 'user_role', 'subscriber');
 
             ?>
 
