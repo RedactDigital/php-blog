@@ -242,7 +242,6 @@ function is_admin($username)
         return true;
     } else {
 
-
         return false;
     }
 }
@@ -324,7 +323,7 @@ function login_user($username, $password)
     $select_user_query = mysqli_query($connection, $query);
     if (!$select_user_query) {
 
-        die("QUERY FAILED" . mysqli_error($connection));
+        die("QUERY FAILED" . mysqli_error($connection)); 
     }
 
 
@@ -444,4 +443,32 @@ function imageResize($post_image)
     }
 
     echo $pass ? "OK" : $error;
+}
+
+function querySelect($table)
+{
+    global $connection;
+
+    $query = "SELECT * FROM " . $table;
+    $query_selection = mysqli_query($connection, $query);
+
+    $result = mysqli_num_rows($query_selection);
+
+    confirmQuery($result);
+
+    return $result;
+}
+
+function querySelectWhere($table, $column, $value)
+{
+    global $connection;
+
+    $query = "SELECT * FROM $table WHERE $column = '$value' ";
+    $query_selection = mysqli_query($connection, $query);
+
+    $result = mysqli_num_rows($query_selection);
+
+    confirmQuery($result);
+
+    return $result;
 }

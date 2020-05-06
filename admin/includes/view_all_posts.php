@@ -149,7 +149,13 @@ if (isset($_POST['checkBoxArray'])) {
 
             <?php
 
-            $query = "SELECT * FROM posts ORDER BY post_id DESC ";
+            //$query = "SELECT * FROM posts ORDER BY post_id DESC ";
+
+            $query = "SELECT posts.post_id, posts.post_author, posts.post_user, posts.post_title, posts.post_category_id, posts.post_status, posts.post_image, posts.post_tags, ";
+            $query .= "posts.post_comment_count, posts.post_date, posts.post_views_count, ";
+            $query .= "categories.cat_id, categories.cat_title ";
+            $query .= "FROM posts LEFT JOIN categories ON posts.post_category_id = categories.cat_id ORDER BY posts.post_id DESC";
+
             $select_posts = mysqli_query($connection, $query);
 
             while ($row = mysqli_fetch_assoc($select_posts)) {
@@ -164,6 +170,8 @@ if (isset($_POST['checkBoxArray'])) {
                 $post_comment_count = $row['post_comment_count'];
                 $post_date          = $row['post_date'];
                 $post_views_count   = $row['post_views_count'];
+                $cat_id             = $row['cat_id'];
+                $cat_title          = $row['cat_title'];
 
                 echo "<tr>";
 
@@ -185,33 +193,11 @@ if (isset($_POST['checkBoxArray'])) {
                     echo "<td>$post_user</td>";
                 }
 
-
-
-
-
-
-
-
                 echo "<td>$post_title</td>";
-
-
-                $query = "SELECT * FROM categories WHERE cat_id = {$post_category_id} ";
-                $select_categories_id = mysqli_query($connection, $query);
-
-                while ($row = mysqli_fetch_assoc($select_categories_id)) {
-                    $cat_id = $row['cat_id'];
-                    $cat_title = $row['cat_title'];
-
-
-                    echo "<td>$cat_title</td>";
-                }
-
-
-
+                echo "<td>$cat_title</td>";
                 echo "<td>$post_status</td>";
                 echo "<td><img width='100' src='../images/$post_image' alt='image'></td>";
                 echo "<td>$post_tags</td>";
-
 
                 $query = "SELECT * FROM comments WHERE comment_post_id = $post_id";
                 $send_comment_query = mysqli_query($connection, $query);
@@ -220,57 +206,32 @@ if (isset($_POST['checkBoxArray'])) {
                 $comment_id = $row['comment_id'];
                 $count_comments = mysqli_num_rows($send_comment_query);
 
-
                 echo "<td><a href='post_comments.php?id=$post_id'>$count_comments</a></td>";
-
-
-
                 echo "<td>$post_date </td>";
                 echo "<td><a class='btn btn-primary' href='../post.php?p_id={$post_id}'>View Post</a></td>";
                 echo "<td><a class='btn btn-info' href='posts.php?source=edit_post&p_id={$post_id}'>Edit</a></td>";
 
-
-
                 ?>
 
-
                 <form method="post">
-
                     <input type="hidden" name="post_id" value="<?php echo $post_id ?>">
-
                     <?php
 
                     echo '<td><input class="btn btn-danger" type="submit" name="delete" value="Delete"></td>';
 
                     ?>
-
-
                 </form>
-
-
-
-
             <?php
-
-
-
-
-                 //echo "<td><a rel='$post_id' href='javascript:void(0)' class='delete_link'>Delete</a></td>";
-
-                 //echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete'); \" href='posts.php?delete={$post_id}'>Delete</a></td>";
+                //echo "<td><a rel='$post_id' href='javascript:void(0)' class='delete_link'>Delete</a></td>";
+                //echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete'); \" href='posts.php?delete={$post_id}'>Delete</a></td>";
                 echo "<td><a href='posts.php?reset={$post_id}'>{$post_views_count}</a></td>";
                 echo "</tr>";
-            }?>
-
-
+            } ?>
 
         </tbody>
     </table>
 
 </form>
-
-
-
 
 <?php
 
@@ -283,7 +244,6 @@ if (isset($_POST['delete'])) {
     header("Location: /admin/posts.php");
 }
 
-
 if (isset($_GET['reset'])) {
 
     $the_post_id = escape($_GET['reset']);
@@ -293,44 +253,26 @@ if (isset($_GET['reset'])) {
     header("Location: posts.php");
 }
 
-
-
 ?>
-
 
 <script>
     $(document).ready(function() {
 
-
         $(".delete_link").on('click', function() {
-
 
             var id = $(this).attr("rel");
 
             var delete_url = "posts.php?delete=" + id + " ";
 
-
             $(".modal_delete_link").attr("href", delete_url);
 
-
             $("#myModal").modal('show');
-
-
-
-
         });
-
-
-
     });
-
-
-
 
     <?php if (isset($_SESSION['message'])) {
 
         unset($_SESSION['message']);
     }
-
     ?>
 </script>

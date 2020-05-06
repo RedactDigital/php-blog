@@ -72,6 +72,8 @@
                        <a href="/registration">Registration</a>
                    </li>
 
+                   <li><a href="/contact">Contact</a></li>
+
 
 
 

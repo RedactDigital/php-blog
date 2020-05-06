@@ -2,13 +2,15 @@
     
 <?php 
 
+if (!is_admin($_SESSION['username'])) {
 
+    redirect('/admin');
+}
     
     
 ?>
 
-    <div id="wrapper">
-       
+    <div id="wrapper">   
 
         
   

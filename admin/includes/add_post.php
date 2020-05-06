@@ -82,18 +82,23 @@ if (isset($_POST['create_post'])) {
 
             <?php
 
-            $users_query = "SELECT * FROM users";
-            $select_users = mysqli_query($connection, $users_query);
+            if (is_admin($_SESSION['username'])) {
 
-            confirmQuery($select_users);
+                $users_query = "SELECT * FROM users";
+                $select_users = mysqli_query($connection, $users_query);
+
+                confirmQuery($select_users);
+
+                while ($row = mysqli_fetch_assoc($select_users)) {
+                    $user_id = $row['user_id'];
+                    $username = $row['username'];
 
 
-            while ($row = mysqli_fetch_assoc($select_users)) {
-                $user_id = $row['user_id'];
-                $username = $row['username'];
+                    echo "<option value='{$username}'>{$username}</option>";
+                }
+            } else {
 
-
-                echo "<option value='{$username}'>{$username}</option>";
+                echo "<option value='{$_SESSION['username']}'>{$_SESSION['username']}</option>";
             }
 
             ?>
