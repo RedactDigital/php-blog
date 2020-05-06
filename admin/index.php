@@ -159,7 +159,7 @@
 
             $post_published_count = querySelectWhere('posts', 'post_status', 'published');
 
-            //$post_draft_count = querySelectWhere('posts', 'post_status', 'draft');
+            $post_draft_count = querySelectWhere('posts', 'post_status', 'draft');
 
             //$unapproved_comment_count = querySelectWhere('comments', 'comment_status', 'unapproved');
 
@@ -167,9 +167,9 @@
 
 
 
-            $query = "SELECT * FROM posts WHERE post_status = 'draft' ";
-            $select_all_draft_posts = mysqli_query($connection, $query);
-            $post_draft_count = mysqli_num_rows($select_all_draft_posts);
+            //$query = "SELECT * FROM posts WHERE post_status = 'draft' ";
+            //$select_all_draft_posts = mysqli_query($connection, $query);
+            //$post_draft_count = mysqli_num_rows($select_all_draft_posts);
 
 
             $query = "SELECT * FROM comments WHERE comment_status = 'unapproved' ";
