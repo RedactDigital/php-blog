@@ -459,7 +459,21 @@ function querySelect($table)
     return $result;
 }
 
-function querySelectWhere($table, $column, $value)
+function querySelectWherePostPublished($table, $column, $value)
+{
+    global $connection;
+
+    $query = "SELECT * FROM $table WHERE $column = '$value' ";
+    $query_selection = mysqli_query($connection, $query);
+
+    $result = mysqli_num_rows($query_selection);
+
+    confirmQuery($result);
+
+    return $result;
+}
+
+function querySelectWherePostDraft($table, $column, $value)
 {
     global $connection;
 

@@ -157,9 +157,9 @@
 
             <?php
 
-            $post_published_count = querySelectWhere('posts', 'post_status', 'published');
+            $post_published_count = querySelectWherePostPublished('posts', 'post_status', 'published');
 
-            $post_draft_count = querySelectWhere('posts', 'post_status', 'draft');
+            $post_draft_count = querySelectWherePostDraft('posts', 'post_status', 'draft');
 
             //$unapproved_comment_count = querySelectWhere('comments', 'comment_status', 'unapproved');
 
