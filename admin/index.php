@@ -88,7 +88,7 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
 
-                                    <div class='huge'><?php echo $comment_count = querySelect('comments'); ?> </div>
+                                    <div class='huge'><?php echo $comment_count = querySelect('comment'); ?> </div>
 
                                     <div>Comments</div>
                                 </div>
@@ -156,7 +156,7 @@
 
 
             <?php
-
+            
             $post_published_count = querySelectWhere('posts', 'post_status', 'published');
 
             $post_draft_count = querySelectWhere('posts', 'post_status', 'draft');
