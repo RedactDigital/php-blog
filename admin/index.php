@@ -159,11 +159,11 @@
 
             //$post_published_count = querySelectWhere('posts', 'post_status', 'published');
 
-            $post_draft_count = querySelectWhere('posts', 'post_status', 'draft');
+            //$post_draft_count = querySelectWhere('posts', 'post_status', 'draft');
 
-            $unapproved_comment_count = querySelectWhere('comments', 'comment_status', 'unapproved');
+            //$unapproved_comment_count = querySelectWhere('comments', 'comment_status', 'unapproved');
 
-            $subscriber_count = querySelectWhere('users', 'user_role', 'subscriber');
+            //$subscriber_count = querySelectWhere('users', 'user_role', 'subscriber');
 
             ?>
 
