@@ -65,7 +65,7 @@ setInterval(function () {
     loadUsersOnline();
 
 
-}
+});
 
 
 
