@@ -454,8 +454,6 @@ function querySelect($table)
 
     $result = mysqli_num_rows($query_selection);
 
-    confirmQuery($result);
-
     return $result;
 }
 
@@ -467,8 +465,6 @@ function checkPostStatus($table, $column, $status)
     $result = mysqli_query($connection, $query);
 
     $result = mysqli_num_rows($result);
-
-    confirmQuery($result);
 
     return $result;
 
