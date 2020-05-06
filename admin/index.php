@@ -157,7 +157,7 @@
 
             <?php
 
-            $post_published_count = querySelectWhere('posts', 'post_status', 'published');
+            //$post_published_count = querySelectWhere('posts', 'post_status', 'published');
 
             $post_draft_count = querySelectWhere('posts', 'post_status', 'draft');
 
