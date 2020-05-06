@@ -161,7 +161,7 @@
 
             //$post_draft_count = querySelectWhere('posts', 'post_status', 'draft');
 
-             $unapproved_comment_count = querySelectWhere('comments', 'comment_status', 'unapproved');
+            //$unapproved_comment_count = querySelectWhere('comments', 'comment_status', 'unapproved');
 
             // $subscriber_count = querySelectWhere('users', 'user_role', 'subscriber');
 
@@ -172,7 +172,9 @@
             $post_draft_count = mysqli_num_rows($select_all_draft_posts);
 
 
-
+            $query = "SELECT * FROM comments WHERE comment_status = 'unapproved' ";
+            $unapproved_comments_query = mysqli_query($connection, $query);
+            $unapproved_comment_count = mysqli_num_rows($unapproved_comments_query);
 
 
             $query = "SELECT * FROM users WHERE user_role = 'subscriber'";
