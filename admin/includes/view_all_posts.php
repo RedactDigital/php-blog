@@ -15,28 +15,14 @@ if (isset($_POST['checkBoxArray'])) {
             case 'published':
 
                 $query = "UPDATE posts SET post_status = '{$bulk_options}' WHERE post_id = {$postValueId}  ";
-
                 $update_to_published_status = mysqli_query($connection, $query);
-                confirmQuery($update_to_published_status);
-
-
-
                 break;
 
 
             case 'draft':
 
                 $query = "UPDATE posts SET post_status = '{$bulk_options}' WHERE post_id = {$postValueId}  ";
-
                 $update_to_draft_status = mysqli_query($connection, $query);
-
-                confirmQuery($update_to_draft_status);
-
-
-
-
-
-
                 break;
 
 
@@ -44,23 +30,14 @@ if (isset($_POST['checkBoxArray'])) {
             case 'delete':
 
                 $query = "DELETE FROM posts WHERE post_id = {$postValueId}  ";
-
                 $update_to_delete_status = mysqli_query($connection, $query);
-
                 confirmQuery($update_to_delete_status);
-
-
-
                 break;
 
 
             case 'clone':
-
-
                 $query = "SELECT * FROM posts WHERE post_id = '{$postValueId}' ";
                 $select_post_query = mysqli_query($connection, $query);
-
-
 
                 while ($row = mysqli_fetch_array($select_post_query)) {
                     $post_title         = $row['post_title'];
@@ -72,7 +49,6 @@ if (isset($_POST['checkBoxArray'])) {
                     $post_tags          = $row['post_tags'];
                     $post_content       = $row['post_content'];
                 }
-
 
                 $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date,post_image,post_content,post_tags,post_status) ";
 
