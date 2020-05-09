@@ -1,74 +1,94 @@
-<?php session_start(); ?>
-<?php include "admin/functions.php"; 
-header("Cache-Control: max-age=2592000");
+<!-- pageheader
+================================================== -->
+<div class="s-pageheader">
 
-?>
-<!DOCTYPE html >
-<html lang="en">
+    <header class="header">
+        <div class="header__content row">
 
-<head>
+            <div class="header__logo">
+                <a class="logo" href="index.html">
+                    <img src="images/logo.svg" alt="Homepage">
+                </a>
+            </div> <!-- end header__logo -->
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name=”robots” content="index, follow">
-    <meta name="description" content="Millennial and GenZ blogs on topics that help other generations understand how invaluable we are to the future. ">
-    <meta name="author" content="Patrick Rizzardi">
+            <ul class="header__social">
+                <li>
+                    <a href="#0"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                </li>
+                <!--<li>
+                    <a href="#0"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                </li>-->
+                <li>
+                    <a href="#0"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                </li>
+                <!--<li>
+                    <a href="#0"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                </li>-->
+            </ul> <!-- end header__social -->
 
-    <title>Understanding Millennials and GenZ | Millennial Blog Topics</title>
+            <a class="header__search-trigger" href="#0"></a>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+            <div class="header__search">
 
-    <!-- Custom CSS -->
-    <link href="css/blog-home.css" rel="stylesheet">
+                <form role="search" method="get" class="header__search-form" action="#">
+                    <label>
+                        <span class="hide-content">Search for:</span>
+                        <input type="search" class="search-field" placeholder="Type Keywords" value="" name="s" title="Search for:" autocomplete="off">
+                    </label>
+                    <input type="submit" class="search-submit" value="Search">
+                </form>
 
-    <link href="css/styles.css" rel="stylesheet">
+                <a href="#0" title="Close Search" class="header__overlay-close">Close</a>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165444854-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-
-        gtag('config', 'UA-165444854-1');
-    </script>
-
-    <!-- Google Tag Manager -->
-    <script>
-        (function(w, d, s, l, i) {
-            w[l] = w[l] || [];
-            w[l].push({
-                'gtm.start': new Date().getTime(),
-                event: 'gtm.js'
-            });
-            var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s),
-                dl = l != 'dataLayer' ? '&l=' + l : '';
-            j.async = true;
-            j.src =
-                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-            f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-N9CV5B2');
-    </script>
-    <!-- End Google Tag Manager -->
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+            </div> <!-- end header__search -->
 
 
+            <a class="header__toggle-menu" href="#0" title="Menu"><span>Menu</span></a>
 
-</head>
+            <nav class="header__nav-wrap">
 
-<body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N9CV5B2" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+                <h2 class="header__nav-heading h6">Site Navigation</h2>
+
+                <ul class="header__nav">
+                    <li><a href="/" title="">Home</a></li>
+                    <li class="has-children">
+                        <a href="#0" title="">Categories</a>
+                        <ul class="sub-menu">
+                            <?php
+                            $query = "SELECT * FROM categories LIMIT 3";
+                            $select_all_categories_query = mysqli_query($connection, $query);
+
+                            while ($row = mysqli_fetch_assoc($select_all_categories_query)) {
+                                $cat_title = $row['cat_title'];
+                                $cat_id = $row['cat_id'];
+
+                                echo "<li><a href='category.php?category=$cat_id'>{$cat_title}</a></li>";
+                            }
+                            ?>
+                        </ul>
+                    </li>
+                    <li class="has-children current">
+                        <a href="#0" title="">Authors</a>
+                        <ul class="sub-menu">
+                            <li><a>Coming Soon</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="style-guide.html" title="">Styles</a></li>
+                    <li><a href="/about" title="">About</a></li>
+                    <li><a href="/contact" title="">Contact</a></li>
+                    <?php if (isLoggedIn()) : ?>
+                        <li><a href="/admin">Admin</a></li>
+                        <li><a href="/includes/logout.php">Logout</a></li>
+                    <?php else : ?>
+                        <li><a href="/login.php">Login</a></li>
+                    <?php endif; ?>
+                </ul> <!-- end header__nav -->
+
+                <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>
+
+            </nav> <!-- end header__nav-wrap -->
+
+        </div> <!-- header-content -->
+    </header> <!-- header -->
+
+</div> <!-- end s-pageheader -->

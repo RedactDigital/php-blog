@@ -12,7 +12,7 @@ if (isset($_POST['create_post'])) {
     $post_image_temp   = ($_FILES['image']['tmp_name']);
 
 
-    $post_tags         = escape($_POST['post_tags']);
+    $post_tags         = escape($_POST['post_tags_id']);
     $post_content      = escape($_POST['post_content']);
     $post_date         = escape(date('d-m-y'));
 
@@ -21,7 +21,7 @@ if (isset($_POST['create_post'])) {
     imageResize($post_image);
 
 
-    $query = "INSERT INTO posts(post_category_id, post_title, post_user, post_date,post_image,post_content,post_tags,post_status) ";
+    $query = "INSERT INTO posts(post_category_id, post_title, post_user, post_date,post_image,post_content,post_tags_id,post_status) ";
 
     $query .= "VALUES({$post_category_id},'{$post_title}','{$post_user}',now(),'{$post_image}','{$post_content}','{$post_tags}', '{$post_status}') ";
 
@@ -130,14 +130,13 @@ if (isset($_POST['create_post'])) {
 
 
     <div class="form-group">
-        <label for="post_image">Post Image</label>
+        <label for="post_image">Post Image <span class="text-small">- Recommended Size: 2000 x 1250px</span></label>
         <input type="file" name="image">
     </div>
 
-    <div class="form-group">
-        <label for="post_tags">Post Tags</label>
-        <input type="text" class="form-control" name="post_tags">
-    </div>
+    <select name="post_tags_id" class="select" >
+        <option value="1" selected>Coming Soon</option>
+    </select> 
 
     <div class="form-group">
         <label for="post_content">Post Content</label>

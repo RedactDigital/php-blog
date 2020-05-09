@@ -59,8 +59,6 @@ if (isset($_SESSION['user_role'])) {
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <link href="css/styles.css" rel="stylesheet">
-
 
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
@@ -74,6 +72,8 @@ if (isset($_SESSION['user_role'])) {
 
 
     <script src="js/jquery.js"></script>
+
+    
 
 
 

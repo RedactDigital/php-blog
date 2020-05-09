@@ -1,22 +1,111 @@
-   <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Millennial Topics</p>
-                </div>
-                <!-- /.col-lg-12 -->
+<!-- s-footer
+    ================================================== -->
+    <footer class="s-footer">
+
+<div class="s-footer__main">
+    <div class="row">
+
+        <div class="col-two md-four mob-full s-footer__sitelinks">
+
+            <h4>Quick Links</h4>
+
+            <ul class="s-footer__linklist">
+                <li><a href="#0">Home</a></li>
+                <li><a href="#0">Categories</a></li>
+                <li><a href="#0">Authors</a></li>
+                <li><a href="#0">About</a></li>
+                <li><a href="#0">Contact</a></li>
+                <li><a href="#0">Privacy Policy</a></li>
+            </ul>
+
+        </div> <!-- end s-footer__sitelinks -->
+
+        <div class="col-two md-four mob-full s-footer__archives">
+
+            <h4>Archives</h4>
+
+            <ul class="s-footer__linklist">
+                <li><a href="#0">No Archives Yet</a></li>
+            </ul>
+
+        </div> <!-- end s-footer__archives -->
+
+        <div class="col-two md-four mob-full s-footer__social">
+
+            <h4>Social</h4>
+
+            <ul class="s-footer__linklist">
+                <li><a href="#0">Facebook</a></li>
+                <li><a href="#0">Instagram</a></li>
+                <li><a href="#0">Twitter</a></li>
+                <li><a href="#0">Pinterest</a></li>
+                <li><a href="#0">Google+</a></li>
+                <li><a href="#0">LinkedIn</a></li>
+            </ul>
+
+        </div> <!-- end s-footer__social -->
+
+        <div class="col-five md-full end s-footer__subscribe">
+
+            <h4>Our Newsletter</h4>
+
+            <p>Coming Soon!</p>
+
+            <div class="subscribe-form">
+                <form id="mc-form" class="group" novalidate="true">
+
+                    <input type="email" value="" name="EMAIL" class="email" id="mc-email" placeholder="Email Address" required="">
+
+                    <input type="submit" name="subscribe" value="Send">
+
+                    <label for="mc-email" class="subscribe-message"></label>
+
+                </form>
             </div>
-            <!-- /.row -->
-        </footer>
+
+        </div> <!-- end s-footer__subscribe -->
 
     </div>
-    <!-- /.container -->
+</div> <!-- end s-footer__main -->
 
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+<div class="s-footer__bottom">
+    <div class="row">
+        <div class="col-full">
+            <div class="s-footer__copyright">
+                <span>© Copyright Philosophy 2018</span>
+                <span>Site Template by <a href="https://colorlib.com/">Colorlib</a></span>
+            </div>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+            <div class="go-top">
+                <a class="smoothscroll" title="Back to Top" href="#top"></a>
+            </div>
+        </div>
+    </div>
+</div> <!-- end s-footer__bottom -->
+
+</footer> <!-- end s-footer -->
+
+
+<!-- preloader
+================================================== -->
+<div id="preloader">
+<div id="loader">
+    <div class="line-scale">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+</div>
+
+
+<!-- Java Script
+================================================== -->
+<script src="js/js/jquery-3.2.1.min.js"></script>
+<script src="js/js/plugins.js"></script>
+<script src="js/js/main.js"></script>
 
 </body>
 

@@ -1,61 +1,75 @@
-<?php include "includes/db.php"; ?>
-<?php include "includes/header.php"; ?>
+    <?php include('includes/head.php'); ?>
+    <?php include('includes/header.php'); ?>
+    <!-- s-content
+    ================================================== -->
+    <section class="s-content s-content--narrow">
 
-<?php
+        <div class="row">
 
+            <div class="s-content__header col-full">
+                <h1 class="s-content__header-title">
+                    Say Hello
+                </h1>
+            </div> <!-- end s-content__header -->
 
-if (isset($_POST['submit'])) {
+            <!--<div class="col-full s-content__main">
 
-    $to         = "patrick.d.rizzardi@gmail.com";
-    $subject    = wordwrap($_POST['subject'], 70);
-    $body       = $_POST['body'];
+                <p class="lead">Lorem ipsum Deserunt est dolore Ut Excepteur nulla occaecat magna occaecat Excepteur nisi esse veniam dolor consectetur minim qui nisi esse deserunt commodo ea enim ullamco non voluptate consectetur minim aliquip Ut incididunt amet ut cupidatat.</p>
+                
+                <p>Duis ex ad cupidatat tempor Excepteur cillum cupidatat fugiat nostrud cupidatat dolor sunt sint sit nisi est eu exercitation incididunt adipisicing veniam velit id fugiat enim mollit amet anim veniam dolor dolor irure velit commodo cillum sit nulla ullamco magna amet magna cupidatat qui labore cillum sit in tempor veniam consequat non laborum adipisicing aliqua ea nisi sint ut quis proident ullamco ut dolore culpa occaecat ut laboris in sit minim cupidatat ut dolor voluptate enim veniam consequat occaecat fugiat in adipisicing in amet Ut nulla nisi non ut enim aliqua laborum mollit quis nostrud sed sed.
+                </p>-->
 
-}
+                <!--<div class="row">
+                    <div class="col-six tab-full">
+                        <h3>Where to Find Us</h3>
 
-?>
-
-<!-- Navigation -->
-
-<?php include "includes/navigation.php"; ?>
-
-<!-- Page Content -->
-<div class="container">
-
-    <section id="login">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-6 col-xs-offset-3">
-                    <div class="form-wrap">
-                        <h1>Contact</h1>
-                        <form role="form" action="" method="post" id="login-form" autocomplete="off">
-
-
-                            <div class="form-group">
-                                <label for="email" class="sr-only">Email</label>
-                                <input type="email" name="email" id="email" class="form-control" placeholder="Enter your Email">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="subject" class="sr-only">Subject</label>
-                                <input type="text" name="subject" id="subject" class="form-control" placeholder="Enter your Subject">
-                            </div>
-                            <div class="form-group">
-
-                                <textarea class="form-control" name="body" id="body" cols="50" rows="10"></textarea>
-                            </div>
-
-                            <input type="submit" name="submit" id="btn-login" class="btn btn-custom btn-lg btn-block btn-primary" value="Submit">
-                        </form>
+                        <p>
+                        1600 Amphitheatre Parkway<br>
+                        Mountain View, CA<br>
+                        94043 US
+                        </p>
 
                     </div>
-                </div> <!-- /.col-xs-12 -->
-            </div> <!-- /.row -->
-        </div> <!-- /.container -->
-    </section>
+
+                    <div class="col-six tab-full">
+                        <h3>Contact Info</h3>
+
+                        <p>contact@philosophywebsite.com<br>
+                        info@philosophywebsite.com <br>
+                        Phone: (+1) 123 456
+                        </p>
+
+                    </div>
+                </div> --><!-- end row --> 
+
+                <form name="cForm" id="cForm" method="post" action="">
+                    <fieldset>
+
+                        <div class="form-field">
+                            <input name="cName" type="text" id="cName" class="full-width" placeholder="Your Name" value="">
+                        </div>
+
+                        <div class="form-field">
+                            <input name="cEmail" type="text" id="cEmail" class="full-width" placeholder="Your Email" value="">
+                        </div>
+
+                        <div class="form-field">
+                            <input name="cWebsite" type="text" id="cWebsite" class="full-width" placeholder="Website"  value="">
+                        </div>
+
+                        <div class="message form-field">
+                        <textarea name="cMessage" id="cMessage" class="full-width" placeholder="Your Message" ></textarea>
+                        </div>
+
+                        <button type="submit" class="submit btn btn--primary full-width">Submit</button>
+
+                    </fieldset>
+                </form> <!-- end form -->
 
 
-    <hr>
+            </div> <!-- end s-content__main -->
 
+        </div> <!-- end row -->
 
-
-    <?php include "includes/footer.php"; ?>
+    </section> <!-- s-content -->
+    <?php include('includes/footer.php');

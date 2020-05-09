@@ -148,22 +148,18 @@ function insert_categories()
     if (isset($_POST['submit'])) {
 
         $cat_title = $_POST['cat_title'];
+        $cat_about = $_POST['cat_about'];
 
         if ($cat_title == "" || empty($cat_title)) {
 
             echo "This Field should not be empty";
         } else {
 
+            $stmt = mysqli_prepare($connection, "INSERT INTO categories(cat_title, cat_about) VALUES(?,?) ");
 
-
-
-
-            $stmt = mysqli_prepare($connection, "INSERT INTO categories(cat_title) VALUES(?) ");
-
-            mysqli_stmt_bind_param($stmt, 's', $cat_title);
+            mysqli_stmt_bind_param($stmt, 'ss', $cat_title, $cat_about);
 
             mysqli_stmt_execute($stmt);
-
 
             if (!$stmt) {
                 die('QUERY FAILED' . mysqli_error($connection));
@@ -363,8 +359,8 @@ function imageResize($post_image)
     // (A1) SETTINGS
     $source = "../images/" . $post_image; // Source image file
     $destination = "../images/" . $post_image; // Resized file name, extension is automatic
-    $max_width = 1280;
-    $max_height = 853;
+    $max_width = 1250;
+    $max_height = 2000;
     // Image quality
     // JPG files - 0 is lowest, 100 is highest
     // PNG files - 0 no compression to 9 most compression
@@ -445,7 +441,7 @@ function imageResize($post_image)
     echo $pass ? "OK" : $error;
 }
 
-function querySelect($table)
+function countsQuery($table)
 {
     global $connection;
 
@@ -457,14 +453,37 @@ function querySelect($table)
     return $result;
 }
 
-function querySelectWhere($table, $column, $status)
+function countsQueryWhere($table, $column, $status)
 {
     global $connection;
 
     $query = "SELECT * FROM $table WHERE $column = '$status' ";
     $result = mysqli_query($connection, $query);
 
-    $result = mysqli_num_rows($result);
+    $result = mysqli_num_rows($result); //counts rows
+
+    return $result;
+
+}
+
+function queryResults($table)
+{
+    global $connection;
+
+    $query = "SELECT * FROM " . $table;
+    $query_selection = mysqli_query($connection, $query);
+
+    return $query_selection; 
+}
+
+function queryResultesWhere($table, $column, $status)
+{
+    global $connection;
+
+    $query = "SELECT * FROM $table WHERE $column = '$status' ";
+    $result = mysqli_query($connection, $query);
+
+    $result = mysqli_num_rows($result); //counts rows
 
     return $result;
 

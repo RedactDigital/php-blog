@@ -31,7 +31,6 @@ if (isset($_POST['checkBoxArray'])) {
 
                 $query = "DELETE FROM posts WHERE post_id = {$postValueId}  ";
                 $update_to_delete_status = mysqli_query($connection, $query);
-                confirmQuery($update_to_delete_status);
                 break;
 
 
@@ -46,7 +45,7 @@ if (isset($_POST['checkBoxArray'])) {
                     $post_author        = $row['post_author'];
                     $post_status        = $row['post_status'];
                     $post_image         = $row['post_image'];
-                    $post_tags          = $row['post_tags'];
+                    $post_tags          = $row['post_tags_id'];
                     $post_content       = $row['post_content'];
                 }
 
@@ -55,12 +54,6 @@ if (isset($_POST['checkBoxArray'])) {
                 $query .= "VALUES({$post_category_id},'{$post_title}','clone',now(),'{$post_image}','{$post_content}','{$post_tags}', '{$post_status}') ";
 
                 $copy_query = mysqli_query($connection, $query);
-
-                if (!$copy_query) {
-
-                    die("QUERY FAILED" . mysqli_error($connection));
-                }
-
                 break;
         }
     }
@@ -75,12 +68,8 @@ if (isset($_POST['checkBoxArray'])) {
 
 
 <form action="" method='post'>
-
     <table class="table table-bordered table-hover">
-
-
         <div id="bulkOptionContainer" class="col-xs-4">
-
             <select class="form-control" name="bulk_options" id="">
                 <option value="">Select Options</option>
                 <option value="published">Publish</option>
@@ -88,18 +77,13 @@ if (isset($_POST['checkBoxArray'])) {
                 <option value="delete">Delete</option>
                 <option value="clone">Clone</option>
             </select>
-
         </div>
-
 
         <div class="col-xs-4">
-
             <input type="submit" name="submit" class="btn btn-success" value="Apply">
             <a class="btn btn-primary" href="posts.php?source=add_post">Add New</a>
-
         </div>
-
-
+        <br><br>
 
         <thead>
             <tr>
@@ -119,15 +103,12 @@ if (isset($_POST['checkBoxArray'])) {
                 <th>Views</th>
             </tr>
         </thead>
-
         <tbody>
-
-
             <?php
 
             //$query = "SELECT * FROM posts ORDER BY post_id DESC ";
 
-            $query = "SELECT posts.post_id, posts.post_author, posts.post_user, posts.post_title, posts.post_category_id, posts.post_status, posts.post_image, posts.post_tags, ";
+            $query = "SELECT posts.post_id, posts.post_author, posts.post_user, posts.post_title, posts.post_category_id, posts.post_status, posts.post_image, posts.post_tags_id, ";
             $query .= "posts.post_comment_count, posts.post_date, posts.post_views_count, ";
             $query .= "categories.cat_id, categories.cat_title ";
             $query .= "FROM posts LEFT JOIN categories ON posts.post_category_id = categories.cat_id ORDER BY posts.post_id DESC";
@@ -142,7 +123,7 @@ if (isset($_POST['checkBoxArray'])) {
                 $post_category_id   = $row['post_category_id'];
                 $post_status        = $row['post_status'];
                 $post_image         = $row['post_image'];
-                $post_tags          = $row['post_tags'];
+                $post_tags          = $row['post_tags_id'];
                 $post_comment_count = $row['post_comment_count'];
                 $post_date          = $row['post_date'];
                 $post_views_count   = $row['post_views_count'];
@@ -155,11 +136,9 @@ if (isset($_POST['checkBoxArray'])) {
 
                 <td><input class='checkBoxes' type='checkbox' name='checkBoxArray[]' value='<?php echo $post_id; ?>'></td>
 
-
                 <?php
 
                 echo "<td>$post_id </td>";
-
 
                 if (!empty($post_author)) {
 
@@ -173,7 +152,16 @@ if (isset($_POST['checkBoxArray'])) {
                 echo "<td>$cat_title</td>";
                 echo "<td>$post_status</td>";
                 echo "<td><img width='100' src='../images/$post_image' alt='image'></td>";
-                echo "<td>$post_tags</td>";
+
+                $query = "SELECT * FROM tags WHERE tag_id = '$post_tags' ";
+                $query_categories = mysqli_query($connection, $query);
+
+                while ($row = mysqli_fetch_assoc($query_categories)) {
+
+                    $the_post_tags = $row['tag_title'];
+
+                    echo "<td>$the_post_tags</td>";
+                }
 
                 $query = "SELECT * FROM comments WHERE comment_post_id = $post_id";
                 $send_comment_query = mysqli_query($connection, $query);

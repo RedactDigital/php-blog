@@ -17,7 +17,7 @@ while ($row = mysqli_fetch_assoc($select_posts_by_id)) {
     $post_status        = $row['post_status'];
     $post_image         = $row['post_image'];
     $post_content       = $row['post_content'];
-    $post_tags          = $row['post_tags'];
+    $post_tags          = $row['post_tags_id'];
     $post_comment_count = $row['post_comment_count'];
     $post_date          = $row['post_date'];
 }
@@ -58,7 +58,7 @@ if (isset($_POST['update_post'])) {
     $query .= "post_date   =  now(), ";
     $query .= "post_user = '{$post_user}', ";
     $query .= "post_status = '{$post_status}', ";
-    $query .= "post_tags   = '{$post_tags}', ";
+    $query .= "post_tags_id   = '{$post_tags}', ";
     $query .= "post_content= '{$post_content}', ";
     $query .= "post_image  = '{$post_image}' ";
     $query .= "WHERE post_id = {$the_post_id} ";
@@ -151,14 +151,6 @@ if (isset($_POST['update_post'])) {
 
     </div>
 
-
-
-    <!--   <div class="form-group">
-         <label for="title">Post Author</label>
-          <input value="<? php // echo $post_user; 
-                        ?>" type="text" class="form-control" name="post_user">
-      </div> -->
-
     <div class="form-group">
         <select name="post_status" id="">
 
@@ -197,7 +189,7 @@ if (isset($_POST['update_post'])) {
 
     <div class="form-group">
         <label for="post_tags">Post Tags</label>
-        <input value="<?php echo $post_tags; ?>" type="text" class="form-control" name="post_tags">
+        <input value="1" type="text" class="form-control" name="post_tags">
     </div>
 
     <div class="form-group">

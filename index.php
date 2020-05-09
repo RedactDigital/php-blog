@@ -1,68 +1,20 @@
-<?php include "includes/db.php"; ?>
-<?php include "includes/header.php"; ?>
+<?php
+include('includes/head.php');
+include('includes/featured.php');
+?>
 
 
-<!-- Navigation -->
+<!-- s-content
+    ================================================== -->
+<section class="s-content">
 
-<?php include "includes/navigation.php"; ?>
+    <div class="row masonry-wrap">
+        <div class="masonry">
+            <div class="grid-sizer"></div>
 
-
-
-<!-- Page Content -->
-<div class="container-fluid">
-    <div class="jumbotron">
-        <div class="container">
-            <div class="page-header">
-                <h1 class="text-center">A Blog for Millennials</h1>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="jumbotron">
-                <?php
-                $query = "SELECT * FROM categories";
-                $select_categories_sidebar = mysqli_query($connection, $query);
-                ?>
-                <h3>Blog Categories</h3>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <ul class="list-unstyled">
-
-                            <?php
-
-                            while ($row = mysqli_fetch_assoc($select_categories_sidebar)) {
-                                $cat_title = $row['cat_title'];
-                                $cat_id = $row['cat_id'];
-
-                                echo "<li><a href='category.php?category=$cat_id'>{$cat_title}</a></li>";
-                            }
-
-                            ?>
-
-                        </ul>
-                    </div>
-
-                </div>
-                <!-- /.row -->
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="jumbotron">
-                <h3>Authors</h3>
-                <p>...</p>
-                <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-
-        <!-- Blog Entries Column -->
-
-        <div class="col-md-12">
             <?php
 
-            $per_page = 10;
+            $per_page = 12;
 
 
             if (isset($_GET['page'])) {
@@ -117,80 +69,201 @@
                     $post_image = $row['post_image'];
                     $post_content = substr($row['post_content'], 0, 400);
                     $post_status = $row['post_status'];
+                    $post_tags_id = $row['post_tags_id'];
 
             ?>
 
-                    <!-- First Blog Post -->
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="jumbotron">
-                                <a href="post.php?p_id=<?php echo $post_id; ?>">
-                                    <img class="img-responsive" src="images/<?php echo $post_image; ?>" alt="">
-                                </a>
-                                <h2>
-                                    <a href="post.php?p_id=<?php echo $post_id; ?>"><?php echo $post_title ?></a>
-                                </h2>
-                                <p class="lead">
-                                    by <a href="author_posts.php?author=<?php echo $post_author ?>&p_id=<?php echo $post_id; ?>"><?php echo $post_author ?></a>
-                                </p>
-                                <p><span class="glyphicon glyphicon-time"></span> <?php echo $post_date ?></p>
-                                <hr>
-                                <p><?php echo $post_content ?></p>
-                                <a class="btn btn-primary" href="post.php?p_id=<?php echo $post_id; ?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-                                <hr>
+                    <article class="masonry__brick entry format-standard" data-aos="fade-up">
+
+                        <div class="entry__thumb">
+                            <a href="post.php?p_id=<?php echo $post_id; ?>" class="entry__thumb-link">
+                                <img src="images/<?php echo $post_image; ?>" srcset="images/<?php echo $post_image; ?> 1x, images/<?php echo $post_image; ?> 2x" alt="">
+                            </a>
+                        </div>
+
+                        <div class="entry__text">
+                            <div class="entry__header">
+
+                                <div class="entry__date">
+                                    <a href="post.php?p_id=<?php echo $post_id; ?>"><?php echo $post_date ?></a>
+                                </div>
+                                <h1 class="entry__title"><a href="post.php?p_id=<?php echo $post_id; ?>"><?php echo $post_title ?></a></h1>
+
                             </div>
-                        </div><?php }
-                        } ?>
+                            <div class="entry__excerpt">
+                                <p>
+                                    <?php echo $post_content ?>
+                                </p>
+                            </div>
+                            <div class="entry__meta">
+                                <span class="entry__meta-links">
+                                    <?php
+                                    $query = "SELECT * FROM tags WHERE tag_id = '$post_tags_id' ";
+                                    $query_categories = mysqli_query($connection, $query);
 
-                    </div>
+                                    while ($row = mysqli_fetch_assoc($query_categories)) {
+
+                                        $the_post_tags = $row['tag_title'];
+
+                                    
+                                    ?>
+                                    <a href="category.html"><?php echo $the_post_tags; }?></a>
+                                </span>
+                            </div>
+                        </div>
+
+                    </article> <!-- end article --><?php }
+                                            } ?>
+        </div> <!-- end masonry -->
+    </div> <!-- end masonry-wrap -->
+
+    <div class="row">
+        <div class="col-full">
+            <nav class="pgn">
+                <ul class="pager">
+
+                    <?php
+
+                    $number_list = array();
+
+                    for ($i = 1; $i <= $count; $i++) {
+
+                        if ($i == $page) {
+
+                            echo "<li '><a class='active_link' href='index.php?page={$i}'>{$i}</a></li>";
+                        } else {
+
+                            echo "<li '><a href='index.php?page={$i}'>{$i}</a></li>";
+                        }
+                    }
+                    ?>
+
+                </ul>
+            </nav>
         </div>
-
-
-
-        <!-- Blog Sidebar Widgets Column -->
-
-
-        <?php include "includes/sidebar.php"; ?>
-
-
     </div>
-    <!-- /.row -->
 
-    <hr>
-
-
-    <ul class="pager">
-
-        <?php
-
-        $number_list = array();
+</section> <!-- s-content -->
 
 
-        for ($i = 1; $i <= $count; $i++) {
+<!-- s-extra
+    ================================================== -->
+<section class="s-extra">
 
+    <div class="row top">
 
-            if ($i == $page) {
+        <?php /*<div class="col-eight md-six tab-full popular">
+            <h3>Popular Posts</h3>
 
-                echo "<li '><a class='active_link' href='index.php?page={$i}'>{$i}</a></li>";
-            } else {
+            <div class="block-1-2 block-m-full popular__posts">
+                <article class="col-block popular__post">
+                    <a href="#0" class="popular__thumb">
+                        <img src="images/thumbs/small/wheel-150.jpg" alt="">
+                    </a>
+                    <h5><a href="#0">Visiting Theme Parks Improves Your Health.</a></h5>
+                    <section class="popular__meta">
+                        <span class="popular__author"><span>By</span> <a href="#0"> John Doe</a></span>
+                        <span class="popular__date"><span>on</span> <time datetime="2017-12-19">Dec 19, 2017</time></span>
+                    </section>
+                </article>
+                <article class="col-block popular__post">
+                    <a href="#0" class="popular__thumb">
+                        <img src="images/thumbs/small/shutterbug-150.jpg" alt="">
+                    </a>
+                    <h5><a href="#0">Key Benefits Of Family Photography.</a></h5>
+                    <section class="popular__meta">
+                        <span class="popular__author"><span>By</span> <a href="#0"> John Doe</a></span>
+                        <span class="popular__date"><span>on</span> <time datetime="2017-12-18">Dec 18, 2017</time></span>
+                    </section>
+                </article>
+                <article class="col-block popular__post">
+                    <a href="#0" class="popular__thumb">
+                        <img src="images/thumbs/small/cookies-150.jpg" alt="">
+                    </a>
+                    <h5><a href="#0">Absolutely No Sugar Oatmeal Cookies.</a></h5>
+                    <section class="popular__meta">
+                        <span class="popular__author"><span>By</span> <a href="#0"> John Doe</a></span>
+                        <span class="popular__date"><span>on</span> <time datetime="2017-12-16">Dec 16, 2017</time></span>
+                    </section>
+                </article>
+                <article class="col-block popular__post">
+                    <a href="#0" class="popular__thumb">
+                        <img src="images/thumbs/small/beetle-150.jpg" alt="">
+                    </a>
+                    <h5><a href="#0">Throwback To The Good Old Days.</a></h5>
+                    <section class="popular__meta">
+                        <span class="popular__author"><span>By</span> <a href="#0"> John Doe</a></span>
+                        <span class="popular__date"><span>on</span> <time datetime="2017-12-16">Dec 16, 2017</time></span>
+                    </section>
+                </article>
+                <article class="col-block popular__post">
+                    <a href="#0" class="popular__thumb">
+                        <img src="images/thumbs/small/tulips-150.jpg" alt="">
+                    </a>
+                    <h5><a href="#0">10 Interesting Facts About Caffeine.</a></h5>
+                    <section class="popular__meta">
+                        <span class="popular__author"><span>By</span> <a href="#0"> John Doe</a></span>
+                        <span class="popular__date"><span>on</span> <time datetime="2017-12-14">Dec 14, 2017</time></span>
+                    </section>
+                </article>
+                <article class="col-block popular__post">
+                    <a href="#0" class="popular__thumb">
+                        <img src="images/thumbs/small/salad-150.jpg" alt="">
+                    </a>
+                    <h5><a href="#0">Healthy Mediterranean Salad Recipes</a></h5>
+                    <section class="popular__meta">
+                        <span class="popular__author"><span>By</span> <a href="#0"> John Doe</a></span>
+                        <span class="popular__date"><span>on</span> <time datetime="2017-12-12">Dec 12, 2017</time></span>
+                    </section>
+                </article>
+            </div> <!-- end popular_posts -->
+        </div> <!-- end popular --> */ ?>
 
-                echo "<li '><a href='index.php?page={$i}'>{$i}</a></li>";
-            }
-        }
+        <!-- <div class="col-four md-six tab-full about"> Old if you include popular posts -->
+        <div class="col-full text-center">
+            <h3>About <?php $page_title ?></h3>
 
+            <p>
+                Donec sollicitudin molestie malesuada. Nulla quis lorem ut libero malesuada feugiat. Pellentesque in ipsum id orci porta dapibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Donec sollicitudin molestie malesuada.
+            </p>
 
+            <ul class="about__social">
+                <li>
+                    <a href="#0"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                </li>
+                <li>
+                    <a href="#0"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                </li>
+                <li>
+                    <a href="#0"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                </li>
+                <li>
+                    <a href="#0"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                </li>
+            </ul> <!-- end header__social -->
+        </div> <!-- end about -->
 
+    </div> <!-- end row -->
 
+    <div class="row bottom tags-wrap">
+        <div class="col-full tags">
+            <h3>Tags</h3>
 
+            <div class="tagcloud">
+                <?php
 
-        ?>
+                $query = "SELECT * FROM tags";
+                $select_all_posts_query = mysqli_query($connection, $query);
 
+                $row = mysqli_fetch_assoc($select_all_posts_query);
+                $post_tags = $row['tag_title'];
+                ?>
+                <a href="#0"><?php echo $post_tags ?></a>
 
+            </div> <!-- end tagcloud -->
+        </div> <!-- end tags -->
+    </div> <!-- end tags-wrap -->
 
+</section> <!-- end s-extra -->
 
-
-    </ul>
-
-
-
-    <?php include "includes/footer.php"; ?>
+<?php include('includes/footer.php'); ?>
