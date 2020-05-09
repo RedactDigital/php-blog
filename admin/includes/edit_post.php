@@ -35,9 +35,9 @@ if (isset($_POST['update_post'])) {
     $post_content        =  escape($_POST['post_content']);
     $post_tags           =  escape($_POST['post_tags']);
 
-    //move_uploaded_file($post_image_temp, "../images/{$post_image}");
+    move_uploaded_file($post_image_temp, "../images/{$post_image}");
 
-    $post_image = imageUpload($post_image_temp);
+    //$post_image = imageUpload($post_image_temp);
 
     if (empty($post_image)) {
 
