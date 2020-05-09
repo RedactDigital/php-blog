@@ -8,8 +8,8 @@ if (isset($_POST['create_post'])) {
     $post_category_id  = escape($_POST['post_category']);
     $post_status       = escape($_POST['post_status']);
 
-    $post_image        = escape($_FILES['image']['name']);
-    $post_image_temp   = ($_FILES['image']['tmp_name']);
+    $post_image        = $_FILES['image']['name'];
+    $post_image_temp   = $_FILES['image']['tmp_name'];
 
 
     $post_tags         = escape($_POST['post_tags_id']);
