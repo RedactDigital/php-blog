@@ -18,9 +18,6 @@ if (isset($_POST['create_post'])) {
 
     move_uploaded_file($post_image_temp, "../images/$post_image");
 
-    imageResize($post_image);
-
-
     $query = "INSERT INTO posts(post_category_id, post_title, post_user, post_date,post_image,post_content,post_tags_id,post_status) ";
 
     $query .= "VALUES({$post_category_id},'{$post_title}','{$post_user}',now(),'{$post_image}','{$post_content}','{$post_tags}', '{$post_status}') ";

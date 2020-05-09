@@ -37,8 +37,6 @@ if (isset($_POST['update_post'])) {
 
     move_uploaded_file($post_image_temp, "../images/$post_image");
 
-    imageResize($post_image);
-
     if (empty($post_image)) {
 
         $query = "SELECT * FROM posts WHERE post_id = $the_post_id ";
