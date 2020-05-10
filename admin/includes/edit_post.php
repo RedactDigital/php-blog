@@ -20,6 +20,7 @@ while ($row = mysqli_fetch_assoc($select_posts_by_id)) {
     $post_tags          = $row['post_tags_id'];
     $post_comment_count = $row['post_comment_count'];
     $post_date          = $row['post_date'];
+    $posts_featured      = $row['posts_featured'];
 }
 
 
@@ -34,6 +35,7 @@ if (isset($_POST['update_post'])) {
     $post_image_temp     =  $_FILES['image']['tmp_name'];
     $post_content        =  escape($_POST['post_content']);
     $post_tags           =  escape($_POST['post_tags']);
+    $posts_featured       =  $_POST['posts_featured'];
 
     move_uploaded_file($post_image_temp, "../images/{$post_image}");
 
@@ -54,6 +56,7 @@ if (isset($_POST['update_post'])) {
 
     $query = "UPDATE posts SET ";
     $query .= "post_title  = '{$post_title}', ";
+    $query .= "posts_featured = '{$posts_featured}', ";
     $query .= "post_category_id = '{$post_category_id}', ";
     $query .= "post_date   =  now(), ";
     $query .= "post_user = '{$post_user}', ";
@@ -86,7 +89,16 @@ if (isset($_POST['update_post'])) {
         <label for="title">Post Title</label>
         <input value="<?php echo htmlspecialchars(stripslashes($post_title)); ?>" type="text" class="form-control" name="post_title">
     </div>
-
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="posts_featured" value="main">
+        <label class="form-check-label" for="featured">
+            Main
+        </label>
+        <input class="form-check-input" type="radio" name="posts_featured" value="featured">
+        <label class="form-check-label" for="featured">
+            Featured
+        </label>
+    </div>
     <div class="form-group">
         <label for="categories">Categories</label>
         <select name="post_category" id="">
@@ -196,7 +208,7 @@ if (isset($_POST['update_post'])) {
         <label for="post_content">Post Content</label>
         <textarea class="form-control" name="post_content" id="body" cols="30" rows="10"><?php echo $post_content; ?></textarea>
 
-        
+
     </div>
 
 
