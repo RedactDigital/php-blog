@@ -89,6 +89,7 @@ if (isset($_POST['update_post'])) {
         <label for="title">Post Title</label>
         <input value="<?php echo htmlspecialchars(stripslashes($post_title)); ?>" type="text" class="form-control" name="post_title">
     </div>
+    <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') { ?>
     <div class="form-check">
         <input class="form-check-input" type="radio" name="posts_featured" value="main">
         <label class="form-check-label" for="featured">
@@ -99,6 +100,7 @@ if (isset($_POST['update_post'])) {
             Featured
         </label>
     </div>
+     <?php }?>
     <div class="form-group">
         <label for="categories">Categories</label>
         <select name="post_category" id="">
