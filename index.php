@@ -52,7 +52,7 @@ include('includes/featured.php');
             if ($count < 1) {
 
 
-                echo "<h1 class='text-center'>No posts available</h1>";
+                echo "<h1 class='text-center' style='position: relative; top: -50px;'>No posts available</h1>";
             } else {
 
 
