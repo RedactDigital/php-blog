@@ -102,7 +102,7 @@ if (isset($_GET['p_id'])) {
                             $row = mysqli_fetch_assoc($select_all_posts_query);
                             $post_tags = $row['tag_title'];
 
-                            echo "<a href='#0'><?php $post_tags ?></a>"
+                            echo "<a href='#0'><?php echo $post_tags ?></a>"
                             ?>
                         </span>
                     </p> <!-- end s-content__tags -->
