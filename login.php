@@ -1,4 +1,5 @@
-<?php include "includes/head.php"; ?>
+<?php include "includes/header.old.php"; ?>
+<link rel="stylesheet" href="admin/css/bootstrap.min.css">
 
 
 <?php
@@ -83,7 +84,5 @@ if (ifItIsMethod('post')) {
     </div>
 
     <hr>
-
-    <?php include "includes/footer.php"; ?>
 
 </div> <!-- /.container -->
