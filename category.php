@@ -89,7 +89,7 @@ if (isset($_GET['category'])) {
                             $post_author = $row['post_user'];
                             $post_date = $row['post_date'];
                             $post_image = $row['post_image'];
-                            $post_content = substr($row['post_content'], 0, 400);
+                            $post_content = substr($row['post_content'], 0, 75);
                             $post_status = $row['post_status'];
 
                     ?>
