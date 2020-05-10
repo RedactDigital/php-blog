@@ -96,7 +96,7 @@ if (isset($_GET['p_id'])) {
                         <span class="s-content__tag-list">
                             <?php
 
-                            $query = "SELECT * FROM tags WHERE tag_id = '$post_id' ";
+                            $query = "SELECT * FROM tags WHERE tag_id = '$the_post_id' ";
                             $select_all_posts_query = mysqli_query($connection, $query);
 
                             $row = mysqli_fetch_assoc($select_all_posts_query);
