@@ -83,7 +83,7 @@
                        <a href="comments.php"><i class="fa fa-fw fa-file"></i> Comments</a>
                    </li>
                    <?php if (is_admin($_SESSION['username'])) {
-                   echo '<li>
+                        echo '<li>
                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Users <i class="fa fa-fw fa-caret-down"></i></a>
                        <ul id="demo" class="collapse">
                            <li>
@@ -94,8 +94,8 @@
                            </li>
                        </ul>
                    </li>';
-                   }
-                   ?>
+                    }
+                    ?>
 
                    <li>
                        <a href="profile.php"><i class="fa fa-fw fa-dashboard"></i> Profile</a>
@@ -110,3 +110,17 @@
 
            <!-- /.navbar-collapse -->
        </nav>
+
+       <div id="page-wrapper">
+
+           <div class="container-fluid">
+
+               <!-- Page Heading -->
+               <div class="row">
+                   <div class="col-lg-12">
+
+
+                       <h1 class="page-header">
+                           Welcome to admin
+                           <small><?php echo $_SESSION['username'] ?></small>
+                       </h1>

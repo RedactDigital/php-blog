@@ -15,58 +15,45 @@ if (!is_admin($_SESSION['username'])) {
 
     <?php include "includes/admin_navigation.php" ?>
 
-    <div id="page-wrapper">
+    <?php
 
-        <div class="container-fluid">
+    if (isset($_GET['source'])) {
 
-            <!-- Page Heading -->
-            <div class="row">
-                <div class="col-lg-12">
+        $source = $_GET['source'];
+    } else {
 
-                    <h1 class="page-header">
-                        Welcome to admin
-                        <small>Author</small>
-                    </h1>
+        $source = '';
+    }
 
-                    <?php
+    switch ($source) {
 
-                    if (isset($_GET['source'])) {
+        case 'add_user';
 
-                        $source = $_GET['source'];
-                    } else {
+            include "includes/add_user.php";
+            break;
 
-                        $source = '';
-                    }
+        case 'edit_user';
 
-                    switch ($source) {
+            include "includes/edit_user.php";
+            break;
 
-                        case 'add_user';
+        default:
 
-                            include "includes/add_user.php";
-                            break;
+            include "includes/view_all_users.php";
+            break;
+    }
 
-                        case 'edit_user';
+    ?>
 
-                            include "includes/edit_user.php";
-                            break;
+</div>
+</div>
+<!-- /.row -->
 
-                        default:
+</div>
+<!-- /.container-fluid -->
 
-                            include "includes/view_all_users.php";
-                            break;
-                    }
+</div>
 
-                    ?>
+<!-- /#page-wrapper -->
 
-                </div>
-            </div>
-            <!-- /.row -->
-
-        </div>
-        <!-- /.container-fluid -->
-
-    </div>
-
-    <!-- /#page-wrapper -->
-
-    <?php include "includes/admin_footer.php" ?>
+<?php include "includes/admin_footer.php" ?>

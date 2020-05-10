@@ -9,65 +9,49 @@
     <?php include "includes/admin_navigation.php" ?>
 
 
+    <?php
+
+    if (isset($_GET['source'])) {
+
+        $source = escape($_GET['source']);
+    } else {
+
+        $source = '';
+    }
+
+    switch ($source) {
+
+        case 'add_post';
+
+            include "includes/add_post.php";
+
+            break;
 
 
-    <div id="page-wrapper">
+        case 'edit_post';
 
-        <div class="container-fluid">
+            include "includes/edit_post.php";
+            break;
 
-            <!-- Page Heading -->
-            <div class="row">
-                <div class="col-lg-12">
+        default:
 
-                    <h1 class="page-header">
-                        Welcome to admin
-                        <small>Author</small>
-                    </h1>
+            include "includes/view_all_comments.php";
 
+            break;
+    }
 
-                    <?php
+    ?>
 
-                    if (isset($_GET['source'])) {
+</div>
+</div>
+<!-- /.row -->
 
-                        $source = escape($_GET['source']);
-                    } else {
+</div>
+<!-- /.container-fluid -->
 
-                        $source = '';
-                    }
-
-                    switch ($source) {
-
-                        case 'add_post';
-
-                            include "includes/add_post.php";
-
-                            break;
+</div>
 
 
-                        case 'edit_post';
+<!-- /#page-wrapper -->
 
-                            include "includes/edit_post.php";
-                            break;
-
-                        default:
-
-                            include "includes/view_all_comments.php";
-
-                            break;
-                    }
-
-                    ?>
-
-                </div>
-            </div>
-            <!-- /.row -->
-
-        </div>
-        <!-- /.container-fluid -->
-
-    </div>
-
-
-    <!-- /#page-wrapper -->
-
-    <?php include "includes/admin_footer.php" ?>
+<?php include "includes/admin_footer.php" ?>
