@@ -96,14 +96,17 @@ if (isset($_GET['p_id'])) {
                         <span class="s-content__tag-list">
                             <?php
 
-                            $query = "SELECT * FROM tags";
-                            $select_all_tags_query = mysqli_query($connection, $query);
+                            //$query = "SELECT * FROM tags";
+                            //$select_all_tags_query = mysqli_query($connection, $query);
 
-                            $row = mysqli_fetch_assoc($select_all_tags_query);
-                            $post_tags = $row['tag_title'];
+                            //while ($row = mysqli_fetch_assoc($select_all_tags_query)) {
+                            //$post_tags = $row['tag_title'];
+                            $post_tags = 'Coming Soon';
 
                             ?>
                             <a href="#0"><?php echo $post_tags ?></a> 
+
+                            <?php } ?>
                         </span>
                     </p> <!-- end s-content__tags -->
 
