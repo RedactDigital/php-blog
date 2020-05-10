@@ -106,7 +106,7 @@ if (isset($_GET['p_id'])) {
                             ?>
                             <a href="#0"><?php echo $post_tags ?></a> 
 
-                            <?php } ?>
+                            <?php //} ?>
                         </span>
                     </p> <!-- end s-content__tags -->
 
