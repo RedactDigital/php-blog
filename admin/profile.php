@@ -28,7 +28,7 @@ if (isset($_SESSION['username'])) {
 
 if (isset($_POST['edit_user'])) {
 
-    querySelect('users');
+    queryResults('users');
 
     $user_firstname = $_POST['user_firstname'];
     $user_lastname = $_POST['user_lastname'];
