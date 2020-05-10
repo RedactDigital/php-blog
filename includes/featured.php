@@ -55,7 +55,7 @@
                         <a href="#0" title="">Categories</a>
                         <ul class="sub-menu">
                             <?php
-                            $query = "SELECT * FROM categories LIMIT 3";
+                            $query = "SELECT * FROM categories";
                             $select_all_categories_query = mysqli_query($connection, $query);
 
                             while ($row = mysqli_fetch_assoc($select_all_categories_query)) {
