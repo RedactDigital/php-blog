@@ -96,13 +96,13 @@ if (isset($_GET['p_id'])) {
                         <span class="s-content__tag-list">
                             <?php
 
-                            $query = "SELECT * FROM tags ";
-                            $select_all_posts_query = mysqli_query($connection, $query);
+                            $query = "SELECT * FROM tags WHERE tag_id = '$the_post_id' ";
+                            $select_all_tags_query = mysqli_query($connection, $query);
 
-                            $row = mysqli_fetch_assoc($select_all_posts_query);
+                            $row = mysqli_fetch_assoc($select_all_tags_query);
                             $post_tags = $row['tag_title'];
 
-                            echo "<a href='#0'><?php echo $post_tags ?></a>"
+                            echo "<a href='#0'> $post_tags</a>";
                             ?>
                         </span>
                     </p> <!-- end s-content__tags -->
