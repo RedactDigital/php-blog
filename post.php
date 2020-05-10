@@ -94,10 +94,16 @@ if (isset($_GET['p_id'])) {
                         <span>Post Tags</span>
 
                         <span class="s-content__tag-list">
-                            <a href="#0">orci</a>
-                            <a href="#0">lectus</a>
-                            <a href="#0">varius</a>
-                            <a href="#0">turpis</a>
+                            <?php
+
+                            $query = "SELECT * FROM tags WHERE tag_id = '$post_id' ";
+                            $select_all_posts_query = mysqli_query($connection, $query);
+
+                            $row = mysqli_fetch_assoc($select_all_posts_query);
+                            $post_tags = $row['tag_title'];
+
+                            echo "<a href='#0'><?php $post_tags ?></a>"
+                            ?>
                         </span>
                     </p> <!-- end s-content__tags -->
 
@@ -152,21 +158,21 @@ if (isset($_GET['p_id'])) {
             <div id="comments" class="row">
                 <div class="col-full">
 
-                    <h3 class="h2"><?php 
-                    
-                    $query = "SELECT * FROM comments WHERE comment_post_id = {$the_post_id} ";
-                    $query .= "AND comment_status = 'approved' ";
-                    $comment_count = mysqli_query($connection,$query);
-                    $comment_count = mysqli_num_rows($comment_count);                    
-                    
-                    echo $comment_count; ?> Comments</h3>
+                    <h3 class="h2"><?php
+
+                                    $query = "SELECT * FROM comments WHERE comment_post_id = {$the_post_id} ";
+                                    $query .= "AND comment_status = 'approved' ";
+                                    $comment_count = mysqli_query($connection, $query);
+                                    $comment_count = mysqli_num_rows($comment_count);
+
+                                    echo $comment_count; ?> Comments</h3>
 
                     <!-- commentlist -->
                     <ol class="commentlist">
                         <?php
 
 
-                        $query = "SELECT * FROM comments WHERE comment_post_id = {$the_post_id} "; 
+                        $query = "SELECT * FROM comments WHERE comment_post_id = {$the_post_id} ";
                         $query .= "AND comment_status = 'approved' ";
                         $query .= "ORDER BY comment_id DESC ";
                         $select_comment_query = mysqli_query($connection, $query);
@@ -366,4 +372,4 @@ if (isset($_GET['p_id'])) {
 
     header("Location: index.php");
 } ?>
-<?php include('includes/footer.php'); ?>
+    <?php include('includes/footer.php'); ?>
