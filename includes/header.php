@@ -2,7 +2,7 @@
 ================================================== -->
 <?php echo ($_SERVER['PHP_SELF'] == "/index.php"
     ? "<section class='s-pageheader s-pageheader--home'>"
-    : "<div class='s-pageheader'>"); 
+    : "<div class='s-pageheader'>");
 ?>
 
 <header class="header">
@@ -53,8 +53,8 @@
             <h2 class="header__nav-heading h6">Site Navigation</h2>
 
             <ul class="header__nav">
-                <li class="<?php echo ($_SERVER['PHP_SELF'] == "/index.php" ? "current" : "");?>"><a href="/" title="">Home</a></li>
-                <li class="has-children <?php echo ($_SERVER['PHP_SELF'] == "/category.php" ? "current" : "");?>">
+                <li class="<?php echo ($_SERVER['PHP_SELF'] == "/index.php" ? "current" : ""); ?>"><a href="/" title="">Home</a></li>
+                <li class="has-children <?php echo ($_SERVER['PHP_SELF'] == "/category.php" ? "current" : ""); ?>">
                     <a href="#0" title="">Categories</a>
                     <ul class="sub-menu">
                         <?php
@@ -70,7 +70,7 @@
                         ?>
                     </ul>
                 </li>
-                <li class="has-children <?php echo ($_SERVER['PHP_SELF'] == "/author.php" ? "current" : "");?>">
+                <li class="has-children <?php echo ($_SERVER['PHP_SELF'] == "/author.php" ? "current" : ""); ?>">
                     <a href="#0" title="">Authors</a>
                     <ul class="sub-menu">
                         <?php
@@ -87,9 +87,11 @@
                         <?php } ?>
                     </ul>
                 </li>
-                <li><a href="style-guide.html" title="">Styles</a></li>
-                <li class="<?php echo ($_SERVER['PHP_SELF'] == "/about.php" ? "current" : "");?>"><a href="/about.php" title="">About</a></li>
-                <li class="<?php echo ($_SERVER['PHP_SELF'] == "/contact.php" ? "current" : "");?>"><a href="/contact.php" title="">Contact</a></li>
+
+                    <li><a href="/style-guide.php" title="">Styles</a></li>
+
+                <li class="<?php echo ($_SERVER['PHP_SELF'] == "/about.php" ? "current" : ""); ?>"><a href="/about.php" title="">About</a></li>
+                <li class="<?php echo ($_SERVER['PHP_SELF'] == "/contact.php" ? "current" : ""); ?>"><a href="/contact.php" title="">Contact</a></li>
                 <?php if (isLoggedIn()) : ?>
                     <li><a href="/admin">Admin</a></li>
                     <li><a href="/includes/logout.php">Logout</a></li>
@@ -105,106 +107,107 @@
     </div> <!-- header-content -->
 </header>
 
-<?php if($_SERVER['PHP_SELF'] != "/index.php") : echo "</div>";  else : ?>
+<?php if ($_SERVER['PHP_SELF'] != "/index.php") : echo "</div>";
+else : ?>
 
-<div class="pageheader-content row">
-    <div class="col-full">
+    <div class="pageheader-content row">
+        <div class="col-full">
 
-        <div class="featured">
+            <div class="featured">
 
-            <div class="featured__column featured__column--big">
+                <div class="featured__column featured__column--big">
 
-                <?php
+                    <?php
 
-                $query = "SELECT * FROM posts WHERE posts_featured = 'main' ";
-                $select_all_main = mysqli_query($connection, $query);
+                    $query = "SELECT * FROM posts WHERE posts_featured = 'main' ";
+                    $select_all_main = mysqli_query($connection, $query);
 
-                while ($row = mysqli_fetch_assoc($select_all_main)) {
-                    $post_title         = $row['post_title'];
-                    $post_user          = $row['post_user'];
-                    $post_image         = $row['post_image'];
-                    $post_date          = $row['post_date'];
-                    $post_category_id   = $row['post_category_id'];
+                    while ($row = mysqli_fetch_assoc($select_all_main)) {
+                        $post_title         = $row['post_title'];
+                        $post_user          = $row['post_user'];
+                        $post_image         = $row['post_image'];
+                        $post_date          = $row['post_date'];
+                        $post_category_id   = $row['post_category_id'];
 
-                    $query = "SELECT * FROM categories WHERE cat_id = '$post_category_id' ";
-                    $select_all_categories = mysqli_query($connection, $query);
-                    $row = mysqli_fetch_assoc($select_all_categories);
-                    $post_category  = $row['cat_title'];
-
-
-                ?>
-
-                    <div class="entry" style="background-image:url('images/<?php echo $post_image ?>');">
-
-                        <div class="entry__content">
-                            <span class="entry__category"><a href="#0"><?php echo $post_category ?></a></span>
-
-                            <h1><a href="#0" title=""><?php echo $post_title ?></a></h1>
-
-                            <div class="entry__info">
-                                <a href="#0" class="entry__profile-pic">
-                                    <img class="avatar" src="images/avatars/user-03.jpg" alt="">
-                                </a>
-
-                                <ul class="entry__meta">
-                                    <li><a href="#0"><?php echo $post_user ?></a></li>
-                                    <li><?php echo $post_date ?></li>
-                                </ul>
-                            </div>
-                        </div> <!-- end entry__content -->
-
-                    </div> <!-- end entry -->
-                <?php } ?>
-            </div> <!-- end featured__big -->
+                        $query = "SELECT * FROM categories WHERE cat_id = '$post_category_id' ";
+                        $select_all_categories = mysqli_query($connection, $query);
+                        $row = mysqli_fetch_assoc($select_all_categories);
+                        $post_category  = $row['cat_title'];
 
 
-            <div class="featured__column featured__column--small">
+                    ?>
 
-                <?php
-                $query = "SELECT * FROM posts WHERE posts_featured = 'featured' ";
-                $select_all_featured = mysqli_query($connection, $query);
+                        <div class="entry" style="background-image:url('images/<?php echo $post_image ?>');">
 
-                while ($row = mysqli_fetch_assoc($select_all_featured)) {
-                    $post_title         = $row['post_title'];
-                    $post_user          = $row['post_user'];
-                    $post_image         = $row['post_image'];
-                    $post_date          = $row['post_date'];
-                    $post_category_id   = $row['post_category_id'];
+                            <div class="entry__content">
+                                <span class="entry__category"><a href="#0"><?php echo $post_category ?></a></span>
 
-                    $query = "SELECT * FROM categories WHERE cat_id = '$post_category_id' ";
-                    $select_all_categories = mysqli_query($connection, $query);
-                    $row = mysqli_fetch_assoc($select_all_categories);
-                    $post_category  = $row['cat_title'];
-                ?>
+                                <h1><a href="#0" title=""><?php echo $post_title ?></a></h1>
 
-                    <div class="entry" style="background-image:url('images/<?php echo $post_image ?>');">
+                                <div class="entry__info">
+                                    <a href="#0" class="entry__profile-pic">
+                                        <img class="avatar" src="images/avatars/user-03.jpg" alt="">
+                                    </a>
 
-                        <div class="entry__content">
-                            <span class="entry__category"><a href="#0"><?php echo $post_category ?></a></span>
+                                    <ul class="entry__meta">
+                                        <li><a href="#0"><?php echo $post_user ?></a></li>
+                                        <li><?php echo $post_date ?></li>
+                                    </ul>
+                                </div>
+                            </div> <!-- end entry__content -->
 
-                            <h1><a href="#0" title=""><?php echo $post_title ?></a></h1>
+                        </div> <!-- end entry -->
+                    <?php } ?>
+                </div> <!-- end featured__big -->
 
-                            <div class="entry__info">
-                                <a href="#0" class="entry__profile-pic">
-                                    <img class="avatar" src="images/avatars/user-03.jpg" alt="">
-                                </a>
 
-                                <ul class="entry__meta">
-                                    <li><a href="#0"><?php echo $post_user ?></a></li>
-                                    <li><?php echo $post_date ?></li>
-                                </ul>
-                            </div>
-                        </div> <!-- end entry__content -->
+                <div class="featured__column featured__column--small">
 
-                    </div> <!-- end entry -->
+                    <?php
+                    $query = "SELECT * FROM posts WHERE posts_featured = 'featured' ";
+                    $select_all_featured = mysqli_query($connection, $query);
 
-                <?php } ?>
+                    while ($row = mysqli_fetch_assoc($select_all_featured)) {
+                        $post_title         = $row['post_title'];
+                        $post_user          = $row['post_user'];
+                        $post_image         = $row['post_image'];
+                        $post_date          = $row['post_date'];
+                        $post_category_id   = $row['post_category_id'];
 
-            </div> <!-- end featured__small -->
+                        $query = "SELECT * FROM categories WHERE cat_id = '$post_category_id' ";
+                        $select_all_categories = mysqli_query($connection, $query);
+                        $row = mysqli_fetch_assoc($select_all_categories);
+                        $post_category  = $row['cat_title'];
+                    ?>
 
-        </div> <!-- end featured -->
+                        <div class="entry" style="background-image:url('images/<?php echo $post_image ?>');">
 
-    </div> <!-- end col-full -->
-</div> <!-- end pageheader-content row -->
-</section>
+                            <div class="entry__content">
+                                <span class="entry__category"><a href="#0"><?php echo $post_category ?></a></span>
+
+                                <h1><a href="#0" title=""><?php echo $post_title ?></a></h1>
+
+                                <div class="entry__info">
+                                    <a href="#0" class="entry__profile-pic">
+                                        <img class="avatar" src="images/avatars/user-03.jpg" alt="">
+                                    </a>
+
+                                    <ul class="entry__meta">
+                                        <li><a href="#0"><?php echo $post_user ?></a></li>
+                                        <li><?php echo $post_date ?></li>
+                                    </ul>
+                                </div>
+                            </div> <!-- end entry__content -->
+
+                        </div> <!-- end entry -->
+
+                    <?php } ?>
+
+                </div> <!-- end featured__small -->
+
+            </div> <!-- end featured -->
+
+        </div> <!-- end col-full -->
+    </div> <!-- end pageheader-content row -->
+    </section>
 <?php endif ?>

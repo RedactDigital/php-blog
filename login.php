@@ -1,8 +1,6 @@
-<?php include "includes/header.old.php"; ?>
-<link rel="stylesheet" href="admin/css/bootstrap.min.css">
-
-
 <?php
+
+include "includes/header.login.php";
 
 checkIfUserIsLoggedInAndRedirect('admin/');
 
@@ -18,19 +16,7 @@ if (ifItIsMethod('post')) {
     }
 }
 
-
-
-
-
-
 ?>
-
-
-
-<!-- Navigation -->
-
-<?php include "includes/navigation.php"; ?>
-
 
 <!-- Page Content -->
 <div class="container">
