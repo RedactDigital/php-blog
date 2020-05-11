@@ -107,11 +107,11 @@ if (isset($_GET['category'])) {
                                         <h1 class="entry__title"><a href="post.php?p_id=<?php echo $post_id; ?>"><?php echo $post_title ?></a></h1>
 
                                     </div>
-                                    <div class="entry__excerpt">
+                                    <!-- <div class="entry__excerpt">
                                         <p>
                                             <?php echo $post_content ?>
                                         </p>
-                                    </div>
+                                    </div> -->
                                     <div class="entry__meta">
                                         <span class="entry__meta-links">
                                             <a href="category.html">Design</a>
