@@ -88,8 +88,8 @@
                     </ul>
                 </li>
                 <li><a href="style-guide.html" title="">Styles</a></li>
-                <li class="<?php echo ($_SERVER['PHP_SELF'] == "/about.php" ? "current" : "");?>"><a href="/about" title="">About</a></li>
-                <li class="<?php echo ($_SERVER['PHP_SELF'] == "/contact.php" ? "current" : "");?>"><a href="/contact" title="">Contact</a></li>
+                <li class="<?php echo ($_SERVER['PHP_SELF'] == "/about.php" ? "current" : "");?>"><a href="/about.php" title="">About</a></li>
+                <li class="<?php echo ($_SERVER['PHP_SELF'] == "/contact.php" ? "current" : "");?>"><a href="/contact.php" title="">Contact</a></li>
                 <?php if (isLoggedIn()) : ?>
                     <li><a href="/admin">Admin</a></li>
                     <li><a href="/includes/logout.php">Logout</a></li>
