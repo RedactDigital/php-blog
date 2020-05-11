@@ -70,7 +70,19 @@
                     <li class="has-children current">
                         <a href="#0" title="">Authors</a>
                         <ul class="sub-menu">
-                            <li><a>Coming Soon</a></li>
+                            <?php
+
+
+                            $query = "SELECT * FROM users";
+                            $select_all_authors_query = mysqli_query($connection, $query);
+
+                            while ($row = mysqli_fetch_assoc($select_all_authors_query)) {
+
+                                $username = $row['username'];
+                            ?>
+
+                                <li><a href='author.php?author=<?php echo $username ?>'><?php echo $username ?></a></li>
+                            <?php } ?>
                         </ul>
                     </li>
                     <li><a href="style-guide.html" title="">Styles</a></li>

@@ -5,9 +5,9 @@
 
 $per_page = 12;
 
-if (isset($_GET['category'])) {
+if (isset($_GET['author'])) {
 
-    $post_category_id  = $_GET['category'];
+    $the_post_author = $_GET['author'];
 
 
     if (isset($_GET['page'])) {
@@ -29,24 +29,14 @@ if (isset($_GET['category'])) {
         $page_1 = ($page * $per_page) - $per_page;
     }
 
-
-
     if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
 
 
-        $post_query_count = "SELECT * FROM posts WHERE post_category_id = '$post_category_id'";
+        $post_query_count = "SELECT * FROM posts WHERE post_user = '$the_post_author' ";
     } else {
 
-        $post_query_count = "SELECT * FROM posts WHERE post_category_id = '$post_category_id' AND post_status = 'published' ";
+        $post_query_count = "SELECT * FROM posts WHERE post_user = '$the_post_author' AND post_status = 'published' ";
     }
-
-    $query = "SELECT * FROM categories WHERE cat_id = '$post_category_id' ";
-    $query_categories = mysqli_query($connection, $query);
-
-    while ($row = mysqli_fetch_assoc($query_categories)) {
-
-        $cat_title = $row['cat_title'];
-        $cat_about = $row['cat_about'];
 
 ?>
 
@@ -56,10 +46,9 @@ if (isset($_GET['category'])) {
 
             <div class="row narrow">
                 <div class="col-full s-content__header" data-aos="fade-up">
-                    <h1>Category: <?php echo $cat_title; ?></h1>
+                    <h1>Posts By: <?php echo ucfirst($the_post_author); ?></h1>
 
-                    <p class="lead"><?php echo $cat_about;
-                                } ?></p>
+                    <p class="lead"><?php echo $user_about; ?></p>
                 </div>
             </div>
             <div class="row masonry-wrap">
@@ -87,7 +76,7 @@ if (isset($_GET['category'])) {
                             $post_author = $row['post_user'];
                             $post_date = $row['post_date'];
                             $post_image = $row['post_image'];
-                            $post_content = substr($row['post_content'], 0, 75);
+                            //$post_content = substr($row['post_content'], 0, 75);
                             $post_status = $row['post_status'];
 
                     ?>
@@ -107,11 +96,11 @@ if (isset($_GET['category'])) {
                                         <h1 class="entry__title"><a href="post.php?p_id=<?php echo $post_id; ?>"><?php echo $post_title ?></a></h1>
 
                                     </div>
-                                    <div class="entry__excerpt">
+                                    <!-- <div class="entry__excerpt">
                                         <p>
                                             <?php echo $post_content ?>
                                         </p>
-                                    </div>
+                                    </div> -->
                                     <div class="entry__meta">
                                         <span class="entry__meta-links">
                                             <a href="category.html">Design</a>
@@ -125,7 +114,7 @@ if (isset($_GET['category'])) {
                 <?php
                         }
                     }
-                }
+    }
                 ?>
                 </div>
             </div>
@@ -136,18 +125,18 @@ if (isset($_GET['category'])) {
 
                             <?php
 
-                            $number_list = array();
+                            // $number_list = array();
 
-                            for ($i = 1; $i <= $count; $i++) {
+                            // for ($i = 1; $i <= $count; $i++) {
 
-                                if ($i == $page) {
+                            //     if ($i == $page) {
 
-                                    echo "<li '><a class='active_link' href='category.php?page={$i}'>{$i}</a></li>";
-                                } else {
+                            //         echo "<li '><a class='active_link' href='category.php?page={$i}'>{$i}</a></li>";
+                            //     } else {
 
-                                    echo "<li '><a href='category.php?page={$i}'>{$i}</a></li>";
-                                }
-                            }
+                            //         echo "<li '><a href='category.php?page={$i}'>{$i}</a></li>";
+                            //     }
+                            // }
                             ?>
 
                         </ul>
@@ -156,8 +145,5 @@ if (isset($_GET['category'])) {
             </div>
 
         </section>
-
-
-
 
         <?php include "includes/footer.php"; ?>

@@ -2,15 +2,9 @@
 <?php include "../includes/db.php"; ?>
 <?php include "functions.php"; ?>
 
-
-
 <?php session_start(); ?>
 
-
 <?php
-
-
-
 
 if (isset($_SESSION['user_role'])) {
 } else {
@@ -18,16 +12,7 @@ if (isset($_SESSION['user_role'])) {
     header("location: /");
 }
 
-
-
-
 ?>
-
-
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -72,13 +57,6 @@ if (isset($_SESSION['user_role'])) {
 
 
     <script src="js/jquery.js"></script>
-
-    
-
-
-
-
-
 
 </head>
 

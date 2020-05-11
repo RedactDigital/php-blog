@@ -38,7 +38,6 @@ $(document).ready(function () {
 
 });
 
-
 function loadUsersOnline() {
 
 
@@ -54,9 +53,9 @@ function loadUsersOnline() {
 }
 
 
-setInterval(function () {
+setInterval(function(){
 
-    loadUsersOnline();
+	loadUsersOnline();
 
 
 });

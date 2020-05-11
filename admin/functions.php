@@ -99,7 +99,7 @@ function users_online()
 
             $session = session_id();
             $time = time();
-            $time_out_in_seconds = 05;
+            $time_out_in_seconds = 5;
             $time_out = $time - $time_out_in_seconds;
 
             $query = "SELECT * FROM users_online WHERE session = '$session'";
@@ -122,7 +122,7 @@ function users_online()
 
 }
 
-users_online();
+//users_online();
 
 
 
@@ -366,29 +366,6 @@ function countsQuery($table)
 }
 
 function countsQueryWhere($table, $column, $status)
-{
-    global $connection;
-
-    $query = "SELECT * FROM $table WHERE $column = '$status' ";
-    $result = mysqli_query($connection, $query);
-
-    $result = mysqli_num_rows($result); //counts rows
-
-    return $result;
-
-}
-
-function queryResults($table)
-{
-    global $connection;
-
-    $query = "SELECT * FROM " . $table;
-    $query_selection = mysqli_query($connection, $query);
-
-    return $query_selection; 
-}
-
-function queryResultesWhere($table, $column, $status)
 {
     global $connection;
 
