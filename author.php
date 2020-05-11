@@ -46,7 +46,7 @@ if (isset($_GET['author'])) {
 
             <div class="row narrow">
                 <div class="col-full s-content__header" data-aos="fade-up">
-                    <h1>Posts By: <?php echo ucfirst($the_post_author); ?></h1>
+                    <h1><?php echo ucwords($the_post_author); ?></h1>
 
                     <p class="lead"><?php 
 

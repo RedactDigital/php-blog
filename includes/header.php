@@ -83,7 +83,7 @@
                             $username = $row['username'];
                         ?>
 
-                            <li><a href='author.php?author=<?php echo $username ?>'><?php echo ucfirst($username); ?></a></li>
+                            <li><a href='author.php?author=<?php echo $username ?>'><?php echo ucwords($username); ?></a></li>
                         <?php } ?>
                     </ul>
                 </li>
