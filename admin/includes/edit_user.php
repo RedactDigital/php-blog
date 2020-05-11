@@ -31,7 +31,6 @@ if (isset($_GET['edit_user'])) {
 
     if (isset($_POST['edit_user'])) {
 
-
         $user_firstname   = escape($_POST['user_firstname']);
         $user_lastname    = escape($_POST['user_lastname']);
         $user_role        = escape($_POST['user_role']);
@@ -43,12 +42,9 @@ if (isset($_GET['edit_user'])) {
         $username      = escape($_POST['username']);
         $user_email    = escape($_POST['user_email']);
         $user_password = escape($_POST['user_password']);
-        $post_date     = escape(date('d-m-y'));
+        $post_date     = date('d-m-y');
 
-
-
-
-        if (!empty($user_password)) {
+        if (empty($user_password)) {
 
             $query_password = "SELECT user_password FROM users WHERE user_id =  $the_user_id";
             $get_user_query = mysqli_query($connection, $query_password);
@@ -56,48 +52,32 @@ if (isset($_GET['edit_user'])) {
 
             $row = mysqli_fetch_array($get_user_query);
 
-            $db_user_password = $row['user_password'];
+            $user_password = $row['user_password'];
+        } else {
 
+            $user_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 12));
+        }
 
-            if ($db_user_password != $user_password) {
+        $query = "UPDATE users SET ";
+        $query .= "user_firstname  = '{$user_firstname}', ";
+        $query .= "user_lastname = '{$user_lastname}', ";
+        $query .= "user_role   =  '{$user_role}', ";
+        $query .= "username = '{$username}', ";
+        $query .= "user_email = '{$user_email}', ";
+        $query .= "user_password   = '{$user_password}' ";
+        $query .= "WHERE user_id = {$the_user_id} ";
 
-                $hashed_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 12));
-            }
+        $edit_user_query = mysqli_query($connection, $query);
 
+        confirmQuery($edit_user_query);
 
-            $query = "UPDATE users SET ";
-            $query .= "user_firstname  = '{$user_firstname}', ";
-            $query .= "user_lastname = '{$user_lastname}', ";
-            $query .= "user_role   =  '{$user_role}', ";
-            $query .= "username = '{$username}', ";
-            $query .= "user_email = '{$user_email}', ";
-            $query .= "user_password   = '{$hashed_password}' ";
-            $query .= "WHERE user_id = {$the_user_id} ";
-
-
-            $edit_user_query = mysqli_query($connection, $query);
-
-            confirmQuery($edit_user_query);
-
-
-            echo "User Updated" . " <a href='users.php'>View Users?</a>";
-        }  // if password empty check end
-
-
-
-
-
-
-    } // Post reques to update user end
-
-
-
-
+        echo "User Updated" . " <a href='users.php'>View Users?</a>";
+    }  // if password empty check end
 
 } else {  // If the user id is not present in the URL we redirect to the home page
 
 
-    header("Location: index.php");
+    header("Location: /");
 }
 
 
@@ -170,8 +150,7 @@ if (isset($_GET['edit_user'])) {
 
     <div class="form-group">
         <label for="post_content">Password</label>
-        <input type="password" value="<?php //echo $user_password; 
-                                        ?>" class="form-control" name="user_password">
+        <input type="password" value="" class="form-control" name="user_password">
     </div>
 
 

@@ -28,61 +28,67 @@ if (isset($_SESSION['username'])) {
 
 if (isset($_POST['edit_user'])) {
 
-    queryResults('users');
+    $user_firstname   = escape($_POST['user_firstname']);
+    $user_lastname    = escape($_POST['user_lastname']);
+    $user_role        = escape($_POST['user_role']);
 
-    $user_firstname = $_POST['user_firstname'];
-    $user_lastname = $_POST['user_lastname'];
-    $user_role = $_POST['user_role'];
+    // $post_image = $_FILES['image']['name'];
+    // $post_image_temp = $_FILES['image']['tmp_name'];
 
-    //            $post_image = $_FILES['image']['name'];
-    //            $post_image_temp = $_FILES['image']['tmp_name'];
 
-    $username = $_POST['username'];
-    $user_email = $_POST['user_email'];
-    $user_password = $_POST['user_password'];
-    //            $post_date = date('d-m-y');
-    //            move_uploaded_file($post_image_temp, "./images/$post_image" );
+    $username      = escape($_POST['username']);
+    $user_email    = escape($_POST['user_email']);
+    $user_password = escape($_POST['user_password']);
 
-    $user_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 10));
+    if (empty($user_password)) {
 
-    $query = "UPDATE users SET ";
-    $query .= "user_firstname  = '{$user_firstname}', ";
-    $query .= "user_lastname = '{$user_lastname}', ";
-    $query .= "user_role   =  '{$user_role}', ";
-    $query .= "username = '{$username}', ";
-    $query .= "user_email = '{$user_email}', ";
-    $query .= "user_password   = '{$user_password}' ";
-    $query .= "WHERE user_id = '{$user_id}' ";
+        $query_password = "SELECT user_password FROM users WHERE user_id =  $user_id";
+        $get_user_query = mysqli_query($connection, $query_password);
+        confirmQuery($get_user_query);
 
-    $edit_user_query = mysqli_query($connection, $query);
+        $row = mysqli_fetch_array($get_user_query);
 
-    confirmQuery($edit_user_query);
+        $user_password = $row['user_password'];
+    } else {
 
-    session_unset();
+        $user_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 12));
 
-    $query = "SELECT * FROM users WHERE username = '{$username}' ";
-    $select_user_query = mysqli_query($connection, $query);
-    if (!$select_user_query) {
-
-        die("QUERY FAILED" . mysqli_error($connection));
     }
+        $query = "UPDATE users SET ";
+        $query .= "user_firstname  = '{$user_firstname}', ";
+        $query .= "user_lastname = '{$user_lastname}', ";
+        $query .= "user_role   =  '{$user_role}', ";
+        $query .= "username = '{$username}', ";
+        $query .= "user_email = '{$user_email}', ";
+        $query .= "user_password   = '{$user_password}' ";
+        $query .= "WHERE user_id = '{$user_id}' ";
+
+        $edit_user_query = mysqli_query($connection, $query);
+
+        confirmQuery($edit_user_query);
+
+        session_unset();
+
+        $query = "SELECT * FROM users WHERE username = '{$username}' ";
+        $select_user_query = mysqli_query($connection, $query);
+        confirmQuery($select_user_query);
 
 
-    while ($row = mysqli_fetch_array($select_user_query)) {
+        while ($row = mysqli_fetch_array($select_user_query)) {
 
-        $db_user_id = $row['user_id'];
-        $db_username = $row['username'];
-        $db_user_password = $row['user_password'];
-        $db_user_firstname = $row['user_firstname'];
-        $db_user_lastname = $row['user_lastname'];
-        $db_user_role = $row['user_role'];
+            $db_user_id = $row['user_id'];
+            $db_username = $row['username'];
+            $db_user_password = $row['user_password'];
+            $db_user_firstname = $row['user_firstname'];
+            $db_user_lastname = $row['user_lastname'];
+            $db_user_role = $row['user_role'];
 
-        $_SESSION['username'] = $db_username;
-        $_SESSION['firstname'] = $db_user_firstname;
-        $_SESSION['lastname'] = $db_user_lastname;
-        $_SESSION['user_role'] = $db_user_role;
+            $_SESSION['username'] = $db_username;
+            $_SESSION['firstname'] = $db_user_firstname;
+            $_SESSION['lastname'] = $db_user_lastname;
+            $_SESSION['user_role'] = $db_user_role;
+        }
     }
-}
 
 ?>
 
@@ -135,7 +141,7 @@ if (isset($_POST['edit_user'])) {
 
         <div class="form-group">
             <label for="post_content">Password</label>
-            <input type="password" value="<?php echo $user_password; ?>" class="form-control" name="user_password">
+            <input type="password" value="" class="form-control" name="user_password">
         </div>
 
         <div class="form-group">
