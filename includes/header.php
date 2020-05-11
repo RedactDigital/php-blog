@@ -53,8 +53,8 @@
             <h2 class="header__nav-heading h6">Site Navigation</h2>
 
             <ul class="header__nav">
-                <li><a href="/" title="">Home</a></li>
-                <li class="has-children">
+                <li class="<?php echo ($_SERVER['PHP_SELF'] == "/index.php" ? "current" : "");?>"><a href="/" title="">Home</a></li>
+                <li class="has-children <?php echo ($_SERVER['PHP_SELF'] == "/category.php" ? "current" : "");?>">
                     <a href="#0" title="">Categories</a>
                     <ul class="sub-menu">
                         <?php
@@ -70,7 +70,7 @@
                         ?>
                     </ul>
                 </li>
-                <li class="has-children current">
+                <li class="has-children <?php echo ($_SERVER['PHP_SELF'] == "/author.php" ? "current" : "");?>">
                     <a href="#0" title="">Authors</a>
                     <ul class="sub-menu">
                         <?php
@@ -88,8 +88,8 @@
                     </ul>
                 </li>
                 <li><a href="style-guide.html" title="">Styles</a></li>
-                <li><a href="/about" title="">About</a></li>
-                <li><a href="/contact" title="">Contact</a></li>
+                <li class="<?php echo ($_SERVER['PHP_SELF'] == "/about.php" ? "current" : "");?>"><a href="/about" title="">About</a></li>
+                <li class="<?php echo ($_SERVER['PHP_SELF'] == "/contact.php" ? "current" : "");?>"><a href="/contact" title="">Contact</a></li>
                 <?php if (isLoggedIn()) : ?>
                     <li><a href="/admin">Admin</a></li>
                     <li><a href="/includes/logout.php">Logout</a></li>
