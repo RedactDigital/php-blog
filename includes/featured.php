@@ -72,18 +72,16 @@
                         <ul class="sub-menu">
                             <?php
 
-                            //$query = "SELECT * FROM categories LIMIT 3";
-                            //$select_all_categories_query = mysqli_query($connection, $query);
+                            $query = "SELECT * FROM users";
+                            $select_all_authors_query = mysqli_query($connection, $query);
 
-                            //while ($row = mysqli_fetch_assoc($select_all_categories_query)) {
-                            //$cat_title = $row['cat_title'];
-                            //$cat_id = $row['cat_id'];
+                            while ($row = mysqli_fetch_assoc($select_all_authors_query)) {
 
-                            //echo "<li><a href='category.php?category=$cat_id'>{$cat_title}</a></li>";
-                            //}
-
+                                $username = $row['username'];
                             ?>
-                            <li>Coming Soon</li>
+
+                                <li><a href='author.php?author=<?php echo $username ?>'><?php echo $username ?></a></li>
+                            <?php } ?>
                         </ul>
                     </li>
                     <li><a href="/about" title="">About</a></li>

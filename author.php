@@ -48,7 +48,18 @@ if (isset($_GET['author'])) {
                 <div class="col-full s-content__header" data-aos="fade-up">
                     <h1>Posts By: <?php echo ucfirst($the_post_author); ?></h1>
 
-                    <p class="lead"><?php echo $user_about; ?></p>
+                    <p class="lead"><?php 
+
+                    $query = "SELECT * FROM users WHERE username = '$the_post_author' ";
+                    $query_user = mysqli_query($connection, $query);
+                    confirmQuery($query_user);
+                    
+                    $row = mysqli_fetch_assoc($query_user);
+                    $user_about = $row['user_about'];
+
+                    echo $user_about; 
+                    ?>
+                    </p>
                 </div>
             </div>
             <div class="row masonry-wrap">

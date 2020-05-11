@@ -11,14 +11,15 @@ if (isset($_SESSION['username'])) {
 
     while ($row = mysqli_fetch_array($select_user_profile_query)) {
 
-        $user_id = $row['user_id'];
-        $username = $row['username'];
-        $user_password = $row['user_password'];
+        $user_id        = $row['user_id'];
+        $username       = $row['username'];
+        $user_password  = $row['user_password'];
         $user_firstname = $row['user_firstname'];
-        $user_lastname = $row['user_lastname'];
-        $user_email = $row['user_email'];
-        $user_image = $row['user_image'];
-        $user_role = $row['user_role'];
+        $user_lastname  = $row['user_lastname'];
+        $user_email     = $row['user_email'];
+        $user_image     = $row['user_image'];
+        $user_role      = $row['user_role'];
+        $user_about     = $row['user_about'];
     }
 }
 ?>
@@ -39,6 +40,7 @@ if (isset($_POST['edit_user'])) {
     $username      = escape($_POST['username']);
     $user_email    = escape($_POST['user_email']);
     $user_password = escape($_POST['user_password']);
+    $user_about    = escape($_POST['user_about']);
 
     if (empty($user_password)) {
 
@@ -60,7 +62,8 @@ if (isset($_POST['edit_user'])) {
         $query .= "user_role   =  '{$user_role}', ";
         $query .= "username = '{$username}', ";
         $query .= "user_email = '{$user_email}', ";
-        $query .= "user_password   = '{$user_password}' ";
+        $query .= "user_password   = '{$user_password}', ";
+        $query .= "user_about   = '{$user_about}' ";
         $query .= "WHERE user_id = '{$user_id}' ";
 
         $edit_user_query = mysqli_query($connection, $query);
@@ -130,18 +133,23 @@ if (isset($_POST['edit_user'])) {
 -->
 
         <div class="form-group">
-            <label for="post_tags">Username</label>
+            <label for="">Username</label>
             <input type="text" value="<?php echo $username; ?>" class="form-control" name="username">
         </div>
 
         <div class="form-group">
-            <label for="post_content">Email</label>
+            <label for="">Email</label>
             <input type="email" value="<?php echo $user_email; ?>" class="form-control" name="user_email">
         </div>
 
         <div class="form-group">
-            <label for="post_content">Password</label>
+            <label for="">Password</label>
             <input type="password" value="" class="form-control" name="user_password">
+        </div>
+
+        <div class="form-group">
+            <label for="">About Me</label>
+            <textarea rows="4" cols="50" value="<?php echo $user_about ?>" class="form-control" name="user_about"><?php echo $user_about ?></textarea>
         </div>
 
         <div class="form-group">

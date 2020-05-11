@@ -72,7 +72,6 @@
                         <ul class="sub-menu">
                             <?php
 
-
                             $query = "SELECT * FROM users";
                             $select_all_authors_query = mysqli_query($connection, $query);
 
